@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 无重复字符的最长子串
+      /*
+      时间复杂度 只有一个for循环  O(n)
+      空间复杂度 有一个字典 O(m) m为字符串不重复的个数 
+      
+      */
+      let str = "abcabcbb";
+      function getLongStr(s) {
+        let l = 0;
+        let res = 0;
+        const map = new Map();
+        for (let r = 0; r < s.length; r++) {
+          // 如果有就是重复字符  右边不能大于左边
+          if (map.has(s[r]) && map.get(s[r]) >= l) {
+            // 移动到重复字符的位置
+            l = map.get(s[r]) + 1;
+          }
+          res = Math.max(res, r - l + 1);
+          //   把字符和下标放到字符里
+          map.set(s[r], r);
+        }
+        return res;
+      }
+      console.log(true && true);
+      console.log(getLongStr(str));
+    </script>
+  </body>
+</html>

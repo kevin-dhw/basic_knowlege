@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        /* 2.调用动画  */
+        animation-name: move; /* 名字 */
+        animation-duration: 5s; /* 持续时间*/
+      }
+      /* 1.定义一个动画 */
+      @keyframes move {
+        /* 0开始 */
+        0% {
+          /* transform变换 */
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(1000px, 0);
+        }
+        50% {
+          transform: translate(1000px, 500px);
+        }
+        75% {
+          transform: translate(0, 500px);
+        }
+        /* 100结束 */
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script>
+      // https://www.bilibili.com/video/BV14J4114768/?p=368&vd_source=d02f7fbafe51d252aa68c8b37c1b048e
+    </script>
+  </body>
+</html>

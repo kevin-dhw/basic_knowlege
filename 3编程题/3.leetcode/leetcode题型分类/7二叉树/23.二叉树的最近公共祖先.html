@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        236 https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
+        */
+      const root = {
+        val: 5,
+        left: {
+          val: 3,
+        },
+        right: {
+          val: 8,
+          right: {
+            val: 10,
+          },
+        },
+      };
+      var lowestCommonAncestor = function (root, p, q) {
+        // 使用递归的方法
+        // 需要从下到上，所以使用后序遍历
+        // 1. 确定递归的函数
+        const travelTree = function (root, p, q) {
+          // 2. 确定递归终止条件
+          // 如果遇到目标  p q  需要往上一级返回
+          if (root === null || root === p || root === q) {
+            return root;
+          }
+          // 3. 确定递归单层逻辑  左右中
+          let left = travelTree(root.left, p, q);
+          let right = travelTree(root.right, p, q);
+          // 中的处理逻辑  都不为空 左右两边都有值  可能出现 p q 需要把root返回
+          if (left !== null && right !== null) {
+            return root;
+          }
+          // 右边为空返回左边   否则返回右
+          if (left === null) {
+            return right;
+          }
+          return left;
+        };
+        return travelTree(root, p, q);
+      };
+    </script>
+  </body>
+</html>

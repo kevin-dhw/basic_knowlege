@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const bt = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 5,
+            left: null,
+            right: null,
+          },
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 6,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null,
+          },
+        },
+      };
+      function inorder(root) {
+        if (!root) return;
+        // 先访问左子树
+        inorder(root.left);
+        // 然后访问根节点
+        console.log(root.val);
+        // 最后访问右子树
+        inorder(root.right);
+      }
+      // inorder(bt);
+
+      // 中序遍历非递归版
+      function inorder2(root) {
+        if (!root) return;
+        const stack = [];
+        // 1.先把所有的左子树放到栈里面
+        let p = root;
+        // 5.指针改为右指针的时候，右要开始循环
+        while (stack.length || p) {
+          while (p) {
+            // 2.每次遍历都把左节点放进去 注意一开始把根节点放进去
+            stack.push(p);
+            p = p.left;
+          }
+          // 3.最近的弹出来
+          const n = stack.pop();
+          console.log(n.val);
+          // 4.最后访问右节点  直接改变指针为右节点即可
+          p = n.right;
+        }
+      }
+      inorder2(bt);
+    </script>
+  </body>
+</html>

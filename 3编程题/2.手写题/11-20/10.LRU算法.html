@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class LRUCache {
+        constructor(length) {
+          if (length < 1) throw new Error("invalid length");
+          this.length = length;
+          this.map = new Map();
+        }
+        set(key, value) {
+          const map = this.map;
+          /*
+          如果已经有了 重新set 
+          删除之后重新建数据会放到最前面
+          */
+          if (map.has(key)) {
+            map.delete(key);
+          }
+          map.set(key, value);
+
+          if (map.size > this.length) {
+            // 如果超出容量则删除 map最老的元素
+            const delKey = map.keys().next().value;
+            map.delete(delKey);
+          }
+        }
+        get(key) {
+          const map = this.map;
+          if (!map.has(key)) return null;
+
+          const value = map.get(key);
+
+          //   放到最前面保持最新的 先删掉  后面加进去
+          map.delete(key);
+          map.set(key, value);
+
+          return value;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 第一个不重复字符
+      let str = "ababbyszwoa";
+      // 错误答案
+      function fn2(str) {
+        let res = "";
+        const map = new Map();
+        for (let r = 0; r < str.length; r++) {
+          let n = str[r];
+          if (map.has(n)) {
+            // 2.第二次set为false 表示字符重复了
+            map.set(n, false);
+          } else {
+            // 拿到map的所有值
+            const arr = [...map.values()];
+            /*
+              如果所有都是false 说明都是重复的 isAllFalse为true
+              现在这里的n则是第一次出现不重复的字符
+            */
+            const isAllFalse = arr.every((item) => item === false);
+            if (isAllFalse) {
+              res = n;
+            } else {
+              /*
+              如果不是 就说明前面有第一个出现不重复的
+              找出来赋值给res (最前面的true)
+              */
+              let key = null;
+              for (let [k, v] of map) {
+                if (v) {
+                  key = k;
+                  break;
+                }
+              }
+              res = key;
+            }
+            // 1.第一次set数据为true
+            map.set(n, true);
+          }
+        }
+        return res;
+      }
+      console.log(fn2(str));
+      // 正确答案
+      function fn(str) {
+        let res = null;
+        const map = new Map();
+        for (let r = 0; r < str.length; r++) {
+          let n = str[r];
+          if (map.has(n)) {
+            map.set(n, false);
+          } else {
+            map.set(n, true);
+          }
+        }
+        /*
+         for (let s of str) {
+          map.set(s, map.has(s) ? false : true);
+        }
+        */
+        for (let [k, v] of map) {
+          if (v) {
+            res = k;
+            break;
+          }
+        }
+        return res;
+      }
+    </script>
+  </body>
+</html>

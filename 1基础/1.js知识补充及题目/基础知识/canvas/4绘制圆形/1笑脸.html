@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      // 1.找到画布
+      let c1 = document.getElementById("c1");
+      // 2.获取画笔，上下文对象
+      let ctx = c1.getContext("2d");
+      //   头
+      ctx.beginPath();
+      ctx.arc(75, 75, 50, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.closePath();
+      //   嘴巴
+      ctx.beginPath();
+      ctx.arc(75, 75, 40, 0, Math.PI);
+      ctx.stroke();
+      ctx.closePath();
+      //   左眼
+      ctx.beginPath();
+      ctx.arc(60, 60, 10, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.closePath();
+      // 右眼
+      ctx.beginPath();
+      ctx.arc(90, 60, 10, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.closePath();
+    </script>
+  </body>
+</html>

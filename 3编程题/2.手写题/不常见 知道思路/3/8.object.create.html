@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+        */
+      // 方法一
+      Object.myCreate = function (obj) {
+        let newObj = {};
+        newObj.__proto__ = obj;
+        return newObj;
+      };
+      //   方法二
+      Object.myCreate2 = function (obj) {
+        function Fun() {}
+        Fun.prototype = obj;
+        return new Fun();
+      };
+    </script>
+  </body>
+</html>

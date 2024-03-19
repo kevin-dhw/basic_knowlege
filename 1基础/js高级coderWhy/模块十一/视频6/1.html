@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function bar() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(123)
+                }, 1000)
+            })
+        }
+
+        // await关键字
+        async function foo() {
+            // await会返回一个结果
+            console.log('111111');
+            // await后代码不在执行  等待有结果后执行
+            const res = await bar()
+            console.log(res);
+            console.log('222222');
+        }
+        foo()
+    </script>
+</body>
+</html>

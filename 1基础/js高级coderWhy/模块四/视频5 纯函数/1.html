@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 纯函数   很重要
+        var address = '广州'
+        function foo(obj) {
+            console.log(obj.name);
+            // 对对象进行了修改  有影响 不是纯函数
+            obj.age = 18
+            // 对其他变量产生了影响 不是纯函数
+            address = obj.address
+        }
+        var obj = {
+            name: 'jack',
+            address: '广州'
+        }
+        foo(obj)
+        console.log(address);
+        console.log(obj);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第一次数据拿到在请求第二次
+        function getData() {
+            requestData("why").then(res1 => {
+                requestData2('111' + res1)
+            })
+        }
+        getData()
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const bt = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 5,
+            left: null,
+            right: null,
+          },
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 6,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null,
+          },
+        },
+      };
+      const preorder = (root) => {
+        if (!root) return;
+        console.log(root.val);
+        preorder(root.left);
+        preorder(root.right);
+      };
+      // preorder(bt);  非递归版先序遍历
+      const preorder2 = (root) => {
+        if (!root) return;
+        const stack = [root];
+        // 4.遍历去不断执行
+        while (stack.length) {
+          // 1.先访问根节点的值 弹出来就可以
+          const n = stack.pop();
+          console.log(n.val);
+          // 2.要先把右子树推入到栈中 因为栈是后进先出
+          if (n.right) stack.push(n.right);
+          // 3.把左子树推入到栈中
+          if (n.left) stack.push(n.left);
+        }
+      };
+      preorder2(bt);
+    </script>
+  </body>
+</html>

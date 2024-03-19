@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class MyPromise {
+        state = "pending";
+        value = undefined;
+        reason = undefined;
+        resolveCallbacks = [];
+        rejectCallbacks = [];
+        constructor(fn) {
+          const resolveHandler = (value) => {
+            if (this.state === "pending") {
+              this.state = "fulfilled";
+              this.value = value;
+              this.resolveCallbacks.forEach((fn) => fn(this.value));
+            }
+          };
+
+          const rejectHandler = (reason) => {
+            if (this.state === "pending") {
+              this.state = "rejected";
+              this.reason = reason;
+              this.rejectCallbacks.forEach((fn) => fn(this.reason));
+            }
+          };
+
+          try {
+            fn(resolveHandler, rejectHandler);
+          } catch (err) {
+            rejectHandler(err);
+          }
+        }
+        then(fn1, fn2) {
+          fn1 = typeof fn1 === "function" ? fn1 : (e) => e;
+          fn2 = typeof fn2 === "function" ? fn2 : (v) => v;
+
+          if (this.state === "pending") {
+            return new MyPromise((resolve, reject) => {
+              this.resolveCallbacks.push(() => {
+                try {
+                  const newValue = fn1(this.value);
+                  resolve(newValue);
+                } catch (err) {
+                  reject(err);
+                }
+              });
+
+              this.rejectCallbacks.push(() => {
+                try {
+                  const newReason = fn2(this.reason);
+                  resolve(newReason);
+                } catch (err) {
+                  reject(err);
+                }
+              });
+            });
+          }
+        }
+        catch(fn) {
+          return this.then(null, fn);
+        }
+      }
+      MyPromise.resolve = function (value) {
+        return new MyPromise((resolve, reject) => {
+          resolve(value);
+        });
+      };
+      MyPromise.reject = function (reason) {
+        return new MyPromise((resolve, reject) => {
+          reject(reason);
+        });
+      };
+      MyPromise.all = function (promiseList = []) {
+        return new MyPromise((resolve, reject) => {
+          const result = [];
+          let count = 0;
+          promiseList.forEach((p) => {
+            p.then((res) => {
+              result.push(res);
+              count++;
+              if (count === promiseList.length) {
+                resolve(result);
+              }
+            });
+          });
+        });
+      };
+      MyPromise.race = function (promiseList = []) {
+        let flag = true;
+        return new MyPromise((resolve, reject) => {
+          promiseList.forEach((p) => {
+            p.then((res) => {
+              if (flag) {
+                resolve(res);
+                flag = false;
+              }
+            });
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

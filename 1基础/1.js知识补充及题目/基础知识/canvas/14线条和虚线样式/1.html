@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      // 1.找到画布
+      let c1 = document.getElementById("c1");
+      // 2.获取画笔，上下文对象
+      let ctx = c1.getContext("2d");
+      let index = 0;
+      function render() {
+        ctx.clearRect(0, 0, 600, 400);
+        index++;
+        if (index > 40) {
+          index = 0;
+        }
+        ctx.moveTo(200, 150);
+        ctx.lineTo(300, 200);
+        ctx.lineTo(400, 150);
+        // 设置线段样式 宽度
+        ctx.lineWidth = 1;
+        // 设置线条端点样式 有三个 默认'butt'  半圆round 正方形square(会多出一节)
+        ctx.lineCap = "square";
+        // 两个线段连接处的样式 默认mitter 半圆round 磨平bevel
+        ctx.lineJoin = "round";
+        // 上面mitter的限制 超过5会变成磨平效果
+        ctx.miterLimit = 5;
+        // 设置虚线 传数组 虚线长度 空格长度
+        ctx.setLineDash([10, 10]);
+        // 偏移
+        ctx.lineDashOffset = 10;
+        ctx.stroke();
+        requestAnimationFrame(render);
+      }
+      render();
+    </script>
+  </body>
+</html>

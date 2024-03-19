@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.bilibili.com/video/BV1jT4y1g7ce/?spm_id_from=333.337.search-card.all.click&vd_source=d02f7fbafe51d252aa68c8b37c1b048e
+      let worker = new Worker("worker.js");
+      console.log(worker);
+      worker.onmessage = (e) => {
+        console.log(e.data);
+      };
+    </script>
+  </body>
+</html>

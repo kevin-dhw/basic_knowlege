@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.模板编译入口
+      function _init(options) {
+        if (options.el) {
+          // 有el属性就会进行模板编译
+          $mount(options.el);
+        }
+      }
+      function $mount(el) {
+        el = document.querySelector(el);
+        // 如果不存在render
+        if (!$options.render) {
+          if ($options.template && el) {
+            // 如果不存在render和template 但是存在el属性 直接将模板赋值到el所在的外层html结构（就是el本身 并不是父元素）
+            template = el.outerHTML;
+          }
+        }
+        // 最终需要把template转换成render函数
+        if (template) {
+          const render = compileToFunctions(template);
+        }
+      }
+
+      //   2.模板转化核心方法 compileToFunctions
+      function compileToFunctions(template) {
+        // 1.把html转换成ast抽象语法树 不仅可以描述html 还可以描述css js
+        // webpack babel eslint也用到了
+        let ast = parse(template);
+        // 2.通过ast生成新的代码
+        let code = generate(ast);
+        // 3.使用with改变作用域为this
+        let renderFn = new Function(`with(this){return ${code}}`);
+        return renderFn;
+      }
+
+      //   3.解析 html 并生成 ast
+      //   1.前面一堆正则
+
+      //  4.根据ast生成代码
+
+      //   5.code 字符串生成 render 函数
+    </script>
+  </body>
+</html>

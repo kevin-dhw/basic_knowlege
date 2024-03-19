@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://www.cnblogs.com/aidixie/p/11212283.html
+      // 1. exce() 查找正则匹配规则，找到就返回, 多个返回第一个，没有返回null
+      var str = "Hello 123 world!Hello 1423 world! ssfsdf";
+      var patt1 = /\d+/; //查找数字
+      var result1 = patt1.exec(str);
+      console.log(result1);
+
+      //   2. test 是否匹配某个模式；匹配的值返回 true ，否则返回 false。
+      var str = "Hello world!";
+      //查找"Hello"
+      var patt2 = /Hello/g;
+      var result2 = patt2.test(str);
+      console.log(result2); //true
+
+      // 3. replace()用于在字符串中用一些字符替换另一些字符
+      var str = "hello world! hello world! hello world!";
+      var a = str.replace(/hello/, "Runoob");
+      var b = str.replace(/hello/gi, "Runoob");
+      console.log(a);
+      console.log(b);
+
+      //   4.match() 在字符串内检索指定的值，或找到一个或多个正则表达式的匹配
+      var str = "The rain in SPAIN stays mainly in the plain";
+      var n = str.match(/ain/g);
+      console.log(n); //["ain", "ain", "ain"]
+    </script>
+  </body>
+</html>

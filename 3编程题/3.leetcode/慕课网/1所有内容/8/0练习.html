@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const bt = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 5,
+            left: null,
+            right: null,
+          },
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 6,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null,
+          },
+        },
+      };
+      function postOrder(root) {
+        if (!root) return;
+        postOrder(root.left);
+        postOrder(root.right);
+        console.log(root.val);
+      }
+      //   postOrder(bt);
+      function postOrder2(root) {
+        if (!root) return;
+        const stack = [root];
+        const outStack = [];
+        while (stack.length) {
+          const n = stack.pop();
+          console.log(n.val);
+          if (n.right) stack.push(n.right);
+          if (n.left) stack.push(n.left);
+        }
+        while (outStack.length) {
+          const n = outStack.pop();
+          console.log(n.val);
+        }
+      }
+      postOrder2(bt);
+    </script>
+  </body>
+</html>

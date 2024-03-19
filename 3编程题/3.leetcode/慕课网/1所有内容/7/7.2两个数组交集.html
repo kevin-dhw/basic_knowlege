@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        /*
+        时间复杂度 O(m+n) m为num1的长度  n为num2的长度
+        空间复杂度是临时变量 这里是map  空间复杂度是O(m) 最坏情况下存m个
+        */ 
+      let num1 = [1, 2, 2, 1];
+      let num2 = [2, 2];
+      function getSame(num1, num2) {
+        const map = new Map();
+        num1.forEach((n) => {
+          map.set(n, true);
+        });
+        const res = [];
+        num2.forEach((n) => { 
+          if (map.get(n)) {
+            res.push(n);
+            map.delete(n);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

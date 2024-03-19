@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        不需要的剪掉
+        */
+      let n = 4,
+        k = 2;
+      let result = [];
+      let path = [];
+      function combine(n, k) {
+        combineHelper(n, k, 1);
+        return result;
+      }
+      const combineHelper = (n, k, startIndex) => {
+        if (path.length === k) {
+          result.push([...path]);
+          return;
+        }
+        //  234是三个数      视频9分钟     k - path.length还需要选取的个数
+        for (let i = startIndex; i <= n - (k - path.length) + 1; i++) {
+          path.push(i);
+          combineHelper(n, k, i + 1);
+          //   弹出去，回溯的重点  12后面需要 3或4 但是不需要2了  所以需要pop
+          path.pop();
+        }
+      };
+      console.log(combine(n, k));
+    </script>
+  </body>
+</html>

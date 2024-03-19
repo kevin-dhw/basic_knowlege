@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function foo() {
+            console.log('foo', this);
+        }
+        // null undefined会使用默认绑定规则
+        foo.call(null)
+
+        var obj1 = {
+            name: 'obj1',
+            fn: function() {
+                console.log('fn', this);
+            }
+        }
+        var obj2 = {
+            name: 'obj2'
+        };
+        // 代码下面如果是 {}[]() 上面要加封号
+        // obj2.fn = obj1.fn
+        // obj2.fn() this指向obj2
+        (obj2.fn = obj1.fn)() //指向window
+    </script>
+</body>
+</html>

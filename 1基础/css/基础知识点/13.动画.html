@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* transition  过渡的所有属性 */
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        /* transition: all 2s; */
+        animation-duration: 2s;
+        animation-name: test;
+        animation-delay: 1s;
+        /* animation-timing-function: ; 速度 animation-iteration-count次数  */
+        /* animation-name 关键帧的名字  animation-duration持续时间  animation-delay延迟多久*/
+      }
+
+      /* .box:hover{
+        border-radius: 50%;
+      } */
+      /* 关键帧   test随便取的名字 */
+      @keyframes test {
+        /* 动画开始位置 from可以谢0%  */
+        from {
+          border-radius: 10px;
+        }
+        /* 动画结束位置 to可以谢100%*/
+        to {
+          border-radius: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script></script>
+  </body>
+</html>

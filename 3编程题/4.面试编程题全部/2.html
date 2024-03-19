@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [
+        ["1", "2"],
+        ["3", "4"],
+        ["5", "6"],
+      ];
+      function fn(arr) {
+        let res = [];
+        let path = [];
+        let k = arr.length;
+        function backtrack(start) {
+          if (path.length === k) {
+            res.push([...path]);
+            return;
+          }
+          for (let i = 0; i < arr[start].length; i++) {
+            let n = arr[start][i];
+            path.push(n);
+            backtrack(start + 1);
+            path.pop();
+          }
+        }
+        backtrack(0);
+        return res;
+      }
+      console.log(fn(arr), "123");
+    </script>
+  </body>
+</html>

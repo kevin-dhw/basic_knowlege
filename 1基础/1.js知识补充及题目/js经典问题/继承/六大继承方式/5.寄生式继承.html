@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        寄生式继承就是在原型式继承上面添加一些方法和属性
+     */
+
+      // 原型继承
+      function inHeritObject(o) {
+        // 创建一个过渡对象
+        function F() {}
+        // 将父类对象的给过渡对象的原型对象上
+        F.prototype = o;
+        // 返回新的实例化对象
+        return new F();
+      }
+      
+      // 寄生式继承
+      function parasiticObject(o) {
+        const obj = this.inHeritObject(o);
+        obj.getName = function () {
+          console.log(this.name);
+        };
+        return obj;
+      }
+    </script>
+  </body>
+</html>

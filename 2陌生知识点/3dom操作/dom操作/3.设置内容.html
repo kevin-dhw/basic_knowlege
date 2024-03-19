@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box">获取内容</div>
+
+    <script>
+      let box = document.getElementById("box");
+      console.log(box);
+      box.addEventListener("click", () => {
+        this.innerHTML = "内容改变了";
+
+        // 样式的操作
+        this.style.width = "100px";
+        this.style.height = "100px";
+        this.style.background = "pink";
+        // 设置className
+        // this.className = "box2";
+      });
+
+      // box.addEventListener("click", function (e) {
+      //   console.log(123);
+      // });
+    </script>
+  </body>
+</html>

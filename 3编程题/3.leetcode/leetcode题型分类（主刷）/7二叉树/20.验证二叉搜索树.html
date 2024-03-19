@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      98 https://leetcode.cn/problems/validate-binary-search-tree/description/
+
+      有效 二叉搜索树定义如下：
+      节点的左子树只包含 小于 当前节点的数。
+      节点的右子树只包含 大于 当前节点的数。
+      所有左子树和右子树自身必须也是二叉搜索树。
+     */
+      /**
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      const root = {
+        val: 5,
+        left: {
+          val: 3,
+        },
+        right: {
+          val: 8,
+          right: {
+            val: 10,
+          },
+        },
+      };
+      //   左中右
+      var isValidBST = function (root) {
+        let arr = [];
+        const buildArr = (root) => {
+          if (root) {
+            buildArr(root.left);
+            arr.push(root.val);
+            buildArr(root.right);
+          }
+        };
+        buildArr(root);
+        for (let i = 1; i < arr.length; ++i) {
+          if (arr[i] <= arr[i - 1]) return false;
+        }
+        return true;
+      };
+
+      /** 递归中解决
+       * Definition for a binary tree node.
+       * function TreeNode(val, left, right) {
+       *     this.val = (val===undefined ? 0 : val)
+       *     this.left = (left===undefined ? null : left)
+       *     this.right = (right===undefined ? null : right)
+       * }
+       */
+      /**
+       * @param {TreeNode} root
+       * @return {boolean}
+       */
+      let pre = null;
+      var isValidBST = function (root) {
+        let pre = null;
+        const inOrder = (root) => {
+          if (root === null) return true;
+          let left = inOrder(root.left);
+
+          if (pre !== null && pre.val >= root.val) return false;
+          pre = root;
+
+          let right = inOrder(root.right);
+          return left && right;
+        };
+        return inOrder(root);
+      };
+    </script>
+  </body>
+</html>

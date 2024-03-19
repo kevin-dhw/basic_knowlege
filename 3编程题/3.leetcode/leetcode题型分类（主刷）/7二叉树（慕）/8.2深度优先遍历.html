@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //深度优先代码 dfs 是深度优先遍历的缩写
+      const tree = {
+        val: "a",
+        children: [
+          {
+            val: "c",
+            children: [
+              {
+                val: "d",
+                children: [],
+              },
+            ],
+          },
+          {
+            val: "b",
+            children: [
+              {
+                val: "e",
+                children: [],
+              },
+            ],
+          },
+        ],
+      };
+      const dfs = (root) => {
+        console.log(root.val);
+        //  root.children.forEach(dfs) 和下面代码一样意思
+        root.children.forEach((child) => dfs(child));
+      };
+      dfs(tree);
+    </script>
+  </body>
+</html>

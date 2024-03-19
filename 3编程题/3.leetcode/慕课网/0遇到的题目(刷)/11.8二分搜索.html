@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 时间复杂度 O（n)
+      let arr = [1, 2, 3, 4, 5];
+      function binarySearch(arr, target) {
+        /*
+        无序需要先排序
+        arr = arr.sort()
+        */
+        let low = 0;
+        let high = arr.length - 1;
+        // 1.遍历
+        while (low <= high) {
+          // 2.从中间开始
+          const mid = Math.floor((low + high) / 2);
+          // 3
+          const element = arr[mid];
+          if (element < target) {
+            // 4.说明在较大数组里面
+            low = mid + 1;
+          } else if (element > target) {
+            // 5.说明在较小数组里面
+            high = mid - 1;
+          } else if (element === target) {
+            // 6. 等于直接返回mid
+            return mid;
+          }
+        }
+        // 7.while没找到说明没有
+        return -1;
+      }
+      console.log(binarySearch(arr, 0));
+    </script>
+  </body>
+</html>

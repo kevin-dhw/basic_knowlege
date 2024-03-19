@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        一维数组实现0 1背包
+        dp[j] 容量为j的背包所背最大值为j
+        地推公式
+        2.地推公式
+            不放物品i是dp[j]  放物品i
+        dp[j] = Max(dp[j], dp[j-height[i]] + value[i])
+        3.初始化dp 第一个为0 其他的为最小数  为0即可
+          dp[0] = 0
+        4.遍历顺序
+         for(let i=0; i<物品数量；i++) {
+            // 倒序遍历背包 12分
+            for(let j=height;j>=weight[i];j--) {
+
+            }
+         }
+      */
+    </script>
+  </body>
+</html>

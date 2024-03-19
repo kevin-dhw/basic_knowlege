@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = { a: 10 };
+      obj.c = obj;
+      const isCycle = (obj) => {
+        const arr = [obj];
+        let flag = false;
+        const cycle = (o) => {
+          const values = Object.values(o);
+          for (let value of values) {
+            if (typeof value === "object" && value !== null) {
+              if (arr.includes(value)) {
+                flag = true;
+                return;
+              }
+              arr.push(value);
+              cycle(value);
+            }
+          }
+        };
+        cycle(obj);
+        return flag;
+      };
+      console.log(isCycle(obj));
+    </script>
+  </body>
+</html>

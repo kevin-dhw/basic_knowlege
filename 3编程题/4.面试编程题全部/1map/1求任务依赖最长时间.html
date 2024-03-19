@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**/
+      const tasks = [
+        {
+          name: "task1",
+          time: 1,
+          dependency: "",
+        },
+        {
+          name: "task2",
+          time: 2,
+          dependency: "",
+        },
+        {
+          name: "task3",
+          time: 3,
+          dependency: "task2",
+        },
+      ];
+      /*
+      时间复杂度O(2^n)
+      */
+      function getTime(tasks) {
+        let arr = [];
+        for (let i = 0; i < tasks.length; i++) {
+          let n = tasks[i];
+          arr.push(n.time);
+          for (let j = 0; j < tasks.length; j++) {
+            let n2 = tasks[j];
+            if (n2.dependency === n.name) {
+              arr.push(n.time + n2.time);
+            }
+          }
+        }
+        return Math.max(...arr);
+      }
+      /*
+      时间复杂度O(n) 空间复杂度O(1)
+      */
+      function getTime2(tasks) {
+        let res = 0;
+        const map = new Map();
+        for (let i = 0; i < tasks.length; i++) {
+          let n = tasks[i];
+          res = Math.max(res, n.time);
+          if (n.dependency) {
+            let allTime = map.get(n.dependency) + n.time;
+            res = Math.max(allTime, res);
+          }
+          map.set(n.name, n.time);
+        }
+        console.log(map);
+        return res;
+      }
+      console.log(getTime(tasks));
+      console.log(getTime2(tasks));
+    </script>
+  </body>
+</html>

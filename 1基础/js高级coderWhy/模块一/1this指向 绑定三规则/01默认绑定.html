@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function foo() {
+            console.log('foo函数', this);
+        }
+        // 函数调用 方式一：   直接调用
+        // foo()
+
+        // 方式二 通过对象调用  这时this指向obj对象
+        let obj = {name: 'why'}
+        obj.fn = foo
+        obj.fn()
+
+        //  方式三   高阶函数  这里调用的是独立函数  指向window 
+        function test(fn) {
+            fn()
+        }
+        test(obj.fn)
+    </script>
+</body>
+</html>

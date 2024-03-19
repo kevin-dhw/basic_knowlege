@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 视频10分钟开始
+      //广度优先代码 bfs 是广度优先遍历的缩写
+      const tree = {
+        val: "a",
+        children: [
+          {
+            val: "c",
+            children: [
+              {
+                val: "d",
+                children: [],
+              },
+            ],
+          },
+          {
+            val: "b",
+            children: [
+              {
+                val: "e",
+                children: [],
+              },
+            ],
+          },
+        ],
+      };
+      const bfs = (root) => {
+        // 新建一个队列 把根节点入队
+        const q = [root];
+        while (q.length > 0) {
+          //   先将对头出队
+          const n = q.shift();
+          console.log(n.val);
+          //   对头的children挨个入队
+          n.children.forEach((child) => {
+            q.push(child);
+          });
+        }
+      };
+      bfs(tree);
+    </script>
+  </body>
+</html>

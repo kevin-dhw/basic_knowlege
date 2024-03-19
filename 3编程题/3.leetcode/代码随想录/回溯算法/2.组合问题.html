@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        给定两个整数 n 和 k，返回范围 [1, n] 中所有可能的 k 个数的组合。
+
+你可以按 任何顺序 返回答案。
+
+ 
+
+示例 1：
+
+输入：n = 4, k = 2
+输出：
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+示例 2：
+
+输入：n = 1, k = 1
+输出：[[1]]
+ 
+     1           2         3        4
+   2 3 4       3   4 
+  12 13 14    23   24
+回溯三部曲
+1.递归函数参数返回值
+2.确定终止条件
+3. 确定单层递归逻辑
+
+        */
+      function fn(n, k) {
+        let result = [];
+        let path = [];
+        dfs(1);
+        return result;
+        function dfs(startIndex) {
+          if (path.length === k) {
+            result.push([...path]);
+            return;
+          }
+          //  234是三个数
+          for (let i = startIndex; i <= n - (k - path.length) + 1; i++) {
+            path.push(i);
+            dfs(i + 1);
+            //   弹出去，回溯的重点  12后面需要 3或4 但是不需要2了  所以需要pop
+            path.pop();
+          }
+        }
+      }
+      console.log(fn(4, 2));
+      console.log(combine(n, k));
+    </script>
+  </body>
+</html>

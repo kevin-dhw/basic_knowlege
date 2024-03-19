@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        98
+        1.确认dp数组   有多少不同的路径
+        因为图是二维的需要一个二维数组
+        dp[i][j]
+        2.地推公式
+        i和j为终点的话  他肯定由上面下来，或者左边过来
+        dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        3.初始化dp数组  8分钟
+
+        */
+      function fn(m, n) {
+        let dp;
+        for (let i = 0; i < m; i++) {
+          dp[i][0] = 1;
+        }
+        for (let j = 0; j < n; j++) {
+          dp[0][j] = 1;
+        }
+        for (let i = 0; i < m; i++) {
+          for (let i = 0; i < m; i++) {
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+          }
+        }
+        console.log(dp);
+        return dp[m - 1][n - 1];
+      }
+      console.log(fn(3, 7));
+    </script>
+  </body>
+</html>

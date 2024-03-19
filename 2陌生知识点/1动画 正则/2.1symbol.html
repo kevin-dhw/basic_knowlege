@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // symbol代表唯一性  不是对象 一般的遍历拿不到值
+      let name = Symbol("aaa");
+      let obj = {
+        [name]: "jack",
+      };
+      console.log(obj, obj[name], "11");
+      //   number表示大数的时候精准度会丢失
+      let num = BigInt(111111111111112333447768879798);
+      let num2 = 11111111111111233344554366744;
+      console.log(num, num2);
+    </script>
+  </body>
+</html>

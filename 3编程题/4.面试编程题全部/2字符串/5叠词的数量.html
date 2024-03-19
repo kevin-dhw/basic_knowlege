@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        Input: 'abcdaaabbccccdddefgaaa'
+        utput: 4
+
+        1. 输出叠词的数量
+        2. 输出去重叠词的数量
+        3. 用正则实现
+        */
+      let s = "abcdaaabbccccdddefgaaa";
+      function fn(s) {
+        const map = new Map();
+        for (let v of s) {
+          map.set(v, map.get(v) ? map.get(v) + 1 : 1);
+        }
+        let count = 0;
+        for (let [k, v] of map) {
+          if (v !== 1) {
+            count++;
+          }
+        }
+        return count;
+      }
+      console.log(fn(s));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      [1, 2, 3, 7, 8, 10]
+      连续的话中间用~连接  字符串形式  1~3 7~8  10
+      */
+      let arr = [1, 2, 3, 7, 8, 10]; //  1~3 7~8  10
+      // 解法一
+      function fn(arr) {
+        const res = [];
+        let i = 0;
+        while (i < arr.length) {
+          const range = {
+            start: arr[i],
+            end: arr[i],
+          };
+          while (i < arr.length && arr[i + 1] === arr[i] + 1) {
+            range.end = arr[i + 1];
+            i++;
+          }
+          res.push(range);
+          i++;
+        }
+        let strArr = res.map(({ start, end }) => {
+          return start === end ? start : `${start}~${end}`;
+        });
+        return strArr.join(" ");
+      }
+      // 解法二
+      function fun(arr) {
+        const res = [];
+        for (let i = 0; i < arr.length; i++) {
+          let obj = {
+            start: arr[i],
+            end: arr[i],
+          };
+          for (let j = i; j < arr.length; j++) {
+            if (arr[j + 1] === arr[j] + 1) {
+              obj.end = arr[j + 1];
+              i++;
+            } else {
+              break;
+            }
+          }
+          res.push(obj);
+        }
+        let resArr = res.map(({ start, end }) => {
+          return start === end ? start : `${start}~${end}`;
+        });
+        return resArr.join(" ");
+      }
+      // 解法三
+      function fn2(arr) {
+        let res = "",
+          l = 0,
+          r = 0,
+          start = arr[l];
+        while (r < arr.length) {
+          if (arr[l] + 1 !== arr[r + 1]) {
+            res += start === arr[r] ? `${start} ` : `${start}~${arr[r]} `;
+            start = arr[r + 1];
+          }
+          l++;
+          r++;
+        }
+        return res;
+      }
+      console.log(fn2(arr));
+    </script>
+  </body>
+</html>

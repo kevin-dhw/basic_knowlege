@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      坑点：多个then
+      如果一个promise有多个then then里面又有微任务
+      会把then里面的微任务都执行完成  然后在执行外面的第二个tehn
+      */
+      new Promise((resolve, reject) => {
+        console.log("外部promise");
+        resolve();
+      })
+        .then(() => {
+          console.log("外部第一个then");
+          return new Promise((resolve, reject) => {
+            console.log("内部promise");
+            resolve();
+          })
+            .then(() => {
+              console.log("内部第一个then");
+            })
+            .then(() => {
+              console.log("内部第二个then");
+            })
+            .then(() => {
+              console.log("内部第三个then");
+            });
+        })
+        .then(() => {
+          console.log("外部第二个then");
+        })
+        .then(() => {
+          console.log(789);
+        });
+      // js高级 模块十一  视频12
+      // 先执行全局  然后执行微任务  后面宏任务
+      /*
+        打印 
+        外部promise
+        外部第一个then
+        内部promise
+        外部第二个then
+        内部第一个then
+        内部第二个then
+
+        微
+        95-107
+        100-110
+        
+        宏
+        */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 不改变结构情况下添加功能
+      function newObj(obj) {
+        return (obj.age = "18");
+      }
+      let obj = {
+        name: "jack",
+      };
+      console.log(newObj(obj));
+    </script>
+  </body>
+</html>

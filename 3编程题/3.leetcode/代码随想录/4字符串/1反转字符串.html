@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        双指针
+
+        */
+      let s = ["1", "2", "3", "4", "5", "6"];
+      function fn(s) {
+        let l = -1,
+          r = s.length;
+        while (++l < --r) [s[l], s[r]] = [s[r], s[l]];
+      }
+      function fun(s) {
+        let l = 0,
+          r = s.length - 1;
+        while (l < r) {
+          [s[l], s[r]] = [s[r], s[l]];
+          l++;
+          r--;
+        }
+        return s;
+      }
+      console.log(fun(s));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   https://juejin.cn/post/7004638318843412493#heading-46
+
+      // 1.这个原型链终点为null 记住
+      Object.prototype.__proto__;
+
+      //  2. ***函数回答对应的答案是对象
+
+      /*
+      Function的prototype是一个对象 对象的__proto__等于函数(new Object)的prototype
+    */
+      Function.prototype.__proto__; //Object.prototype
+
+      //   对象的__proto__ 等于函数(function Object)的prototype
+      Object.__proto__; //Function.prototype
+
+      //   函数的prototype会等于对象的__proto__
+      Object instanceof Function; //true
+
+      /*
+     函数本就是一个对象有自己的__proto__  函数的__proto__会指向一个函数的prototype
+     function Object   函数 Object会有自己的prototype
+    */
+      Function instanceof Object; //true
+
+      /*
+       构造函数本身就是一个对象 有自己的__proto__
+       对象的__proto__ 会指向一个函数的prototype  Function.prototype 
+      */
+      Function.prototype === Function.__proto__; //true
+    </script>
+  </body>
+</html>

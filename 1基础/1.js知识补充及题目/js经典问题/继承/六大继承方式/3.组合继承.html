@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="http://www.baidu.com" target="_blank"
+      >Copyright © 2022安徽嵇康酒业有限公司</a
+    >
+    <script>
+      /*
+        组合继承 是构造函数和原型=式继承的结合
+        原型链继承原型属性和方法，
+        构造函数继承实例属性
+      */
+
+      // 父类
+      function SuperType(name) {
+        this.colors = ["red", "blue", "green"];
+        this.name = name; // 父类属性
+      }
+      SuperType.prototype.sayName = function () {
+        // 父类原型方法
+        return this.name;
+      };
+
+      // 子类
+      function SubType(name, subName) {
+        // 调用 SuperType 构造函数
+        SuperType.call(this, name); // ----第二次调用 SuperType----
+        this.subName = subName;
+      }
+
+      // ----第一次调用 SuperType----
+      SubType.prototype = new SuperType(); // 重写原型对象，代之以一个新类型的实例
+
+      SubType.prototype.constructor = SubType; // 组合继承需要修复构造函数指向
+      SubType.prototype.saySubName = function () {
+        // 子类原型方法
+        return this.subName;
+      };
+      /*
+    优点： 弥补了前面两次继承的缺点
+    缺点： 调用了两次父级构造函数  生成两份实例
+    */
+    </script>
+  </body>
+</html>

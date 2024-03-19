@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="ele">
+      <span>
+        <a></a>
+      </span>
+      <span>
+        <a></a>
+        <a></a>
+      </span>
+    </div>
+    <script>
+      /*
+      {
+        tag: 'DIV',
+        children: [
+          {
+            tag: 'SPAN',
+            children: [
+              { tag: 'A', children: [] }
+            ]
+          },
+          {
+            tag: 'SPAN',
+            children: [
+              { tag: 'A', children: [] },
+              { tag: 'A', children: [] }
+            ]
+          }
+        ]
+      }
+      */
+      let domtree = document.querySelector("#ele");
+      function dom2Json(domtree) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        let obj = {};
+        obj.tag = domtree.tagName;
+        obj.children = [];
+        console.log(domtree);
+        Array.from(domtree.children).forEach((child) =>
+          obj.children.push(dom2Json(child))
+        );
+        return obj;
+      }
+      console.log(dom2Json(domtree));
+    </script>
+  </body>
+</html>

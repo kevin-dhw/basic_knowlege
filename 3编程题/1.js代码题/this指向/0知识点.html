@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- https://juejin.cn/post/6844903805587619854#heading-4
+     掘金题目： https://juejin.cn/post/7023944134561890318
+               https://juejin.cn/post/6844903648313475080
+    -->
+    <script>
+      function sayHi() {
+        console.log("Hello,", this.name);
+      }
+      var person1 = {
+        name: "YvetteLau",
+        sayHi: function () {
+          setTimeout(function () {
+            console.log("Hello,", this.name);
+          });
+        },
+      };
+      var person2 = {
+        name: "Christina",
+        sayHi: sayHi,
+      };
+      var name = "Wiliam";
+      person1.sayHi(); //    定时器的this指向windom
+      setTimeout(person2.sayHi, 100); //  这里也会指向windom
+      setTimeout(function () {
+        person2.sayHi(); // 这里因为最后一次是person2调用  所以指向person2
+      }, 200);
+
+      // 第二题
+      function sayHi() {
+        console.log("Hello,", this.name);
+      }
+      var person = {
+        name: "YvetteLau",
+        sayHi: sayHi,
+      };
+      var name = "Wiliam";
+      var Hi = function (fn) {
+        fn();
+      };
+      Hi.call(person, person.sayHi); // 指向windom  相当于fn直接调用
+    </script>
+  </body>
+</html>

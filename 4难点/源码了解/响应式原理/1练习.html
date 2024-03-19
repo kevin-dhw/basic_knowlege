@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Observe {
+        constructor(value) {
+          if (Array.isArray(value)) {
+            observeArray(value);
+          } else {
+            this.walk(value);
+          }
+        }
+        walk(data) {
+          let keys = Object.keys(data);
+          for (let i = 0; i < keys.length; i++) {
+            let key = keys[i];
+            let value = data[key];
+            defineReactive(data, key, value);
+          }
+        }
+      }
+      function defineReactive(data, key, value) {
+        Observe(data);
+        Object.defineProperties(data, key, {
+          get() {
+            return value;
+          },
+          set(newValue) {
+            if (newValue === value) return;
+            value = newValue;
+          },
+        });
+      }
+      class Dep {
+        constructor() {
+          this.sub = [];
+        }
+        addSub(sub) {
+          if (sub && sub.update) {
+            this.subs.push(sub);
+          }
+        }
+        notify() {
+          this.subs.forEach((sub) => {
+            sub.update();
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

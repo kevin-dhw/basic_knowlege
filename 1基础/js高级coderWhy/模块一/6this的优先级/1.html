@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn() {
+            console.log('fn', this);
+        }
+        let obj = {
+            fn: fn
+        }
+        //call apply bind显示绑定的优先级高
+        obj.fn.bind('abc')
+
+        // new高于隐式
+        let obj2 = {
+            name: 'why',
+            foo: function() {
+                console.log('foo', this);
+            }
+        }
+        // 创建空对象 指向新的空对象
+        new obj2.foo()
+
+
+        // new 不能和 call apply一起使用 只能和bind使用 new高于bind
+        let bindFn = fn.bind('111')
+        new bindFn()
+
+        // apply/bind 优先级  bind高于apply 也高于call
+        let bindFn2 = fn.bind('11122')
+        bindFn2.call('aaa')
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fn(name) {
+        console.log(this.name, ...arguments, "33");
+        console.log(this);
+      }
+      let obj = {
+        name: "jack",
+      };
+      Function.prototype.myCall = function (context, ...args) {
+        if (!context || context === null) {
+          context = window;
+        }
+        // 创造唯一的key值  作为我们构造的context内部方法名
+        let fn = Symbol();
+        context[fn] = this; //this指向调用call的函数
+        // 执行函数并返回结果 相当于把自身作为传入的context的方法进行调用了
+        return context[fn](...args);
+      };
+
+      fn.myCall(fn, "小明", 20, 30, 50);
+    </script>
+  </body>
+</html>

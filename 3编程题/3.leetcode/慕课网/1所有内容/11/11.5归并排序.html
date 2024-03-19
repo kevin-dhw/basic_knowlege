@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 4, 3, 5, 2];
+      Array.prototype.mergeSort = function () {
+        // 1先分
+        const rec = (arr) => {
+          // 6.数组长度为一的时候终止掉 然后返回
+          if (arr.length === 1) return arr;
+          // 2. 先获取中间的下标
+          const mid = Math.floor(arr.length / 2);
+          // 3.获取左边数组
+          const left = arr.slice(0, mid);
+          // 4.获取右边数组
+          const right = arr.slice(mid, arr.length);
+          // 5.递归调用 拿到一个自然是有序的
+          const orderLeft = rec(left);
+          const orderRight = rec(right);
+          // 7.合并 10分钟
+          const res = [];
+          while (orderLeft.length || orderRight.length) {
+            if (orderLeft.length && orderRight.length) {
+              res.push(
+                orderLeft[0] < orderRight[0]
+                  ? orderLeft.shift()
+                  : orderRight.shift()
+              );
+            } else if (orderLeft.length) {
+              // 8.如果左边有值 左边的出队 推入 res中
+              res.push(orderLeft.shift());
+              // 右边空了 把左边推入
+            } else if (orderRight.length) {
+              // 9.如果右边有值 右边的出队 推入 res中
+              res.push(orderRight.shift());
+            }
+          }
+          return res;
+        };
+        const res = rec(this);
+        res.forEach((n, i) => (this[i] = n));
+        console.log(this);
+      };
+      arr.mergeSort();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  2的题目加返回值
+      /*
+        坑点：
+          1. awaite后面执行的整体是 promise
+           console.log("srcipt start")相当于 await 下面的代码 会加入微任务
+
+          2. await后面的promise的then的res是promise里面resolve的结果
+
+          3.async1的then的res其实就是async1 return的结果 
+            如果没有renturn 默认是一个null
+        */
+      async function async1() {
+        console.log("async1 start");
+        await new Promise((resolve) => {
+          console.log("promise1");
+          resolve("promise1 resolve");
+        }).then((res) => console.log(res, "333"));
+        console.log("async1 success");
+        return "async1 end";
+      }
+      console.log("srcipt start");
+      async1().then((res) => console.log(res, "1"));
+      console.log("srcipt end");
+      /*
+      打印
+      srcipt start
+      async1 start
+      promise1
+      srcipt end
+      // promise.then后面的代码是同步执行
+      promise1 resolve
+      async1 success
+      async1 end
+      */
+    </script>
+  </body>
+</html>

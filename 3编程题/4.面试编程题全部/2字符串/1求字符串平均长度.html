@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 按相同数字分成数组，求它们长度平均值
+      // 111 2222 33 44    (3+4+2+2)/4
+      let string = "11122223344";
+      function fun(str) {
+        const map = new Map();
+        for (let i = 0; i < str.length; i++) {
+          let n = str[i];
+          if (map.has(n)) {
+            map.set(n, map.get(n) + 1);
+          } else {
+            map.set(n, 1);
+          }
+        }
+        return str.length / map.size;
+      }
+      console.log(fun(string));
+      // let sum = 0;
+      // for (let [k, v] of map) {
+      //   sum += v;
+      // }
+    </script>
+  </body>
+</html>

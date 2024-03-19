@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        a: 1,
+        b: {
+          c: 2,
+          d: {
+            e: 4,
+          },
+        },
+      };
+      function getBigNum(num1, num2) {
+        return Math.max(num1, num2);
+      }
+      function isObject(val) {
+        return typeof val === "object" && val !== null;
+      }
+      function getLevel(obj) {
+        let result = 1;
+        const dfs = (param, level = 0) => {
+          if (isObject(param)) {
+            Object.values(param).forEach((item) => {
+              if (isObject(item)) {
+                dfs(item, level + 1);
+              } else {
+                result = getBigNum(level + 1, result);
+              }
+            });
+          } else {
+            result = getBigNum(level, result);
+          }
+        };
+        dfs(obj);
+        return result;
+      }
+      console.log(getLevel(obj));
+    </script>
+  </body>
+</html>

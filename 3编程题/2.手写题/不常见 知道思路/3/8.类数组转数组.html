@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+      const arrayLike = document.querySelectorAll("div");
+      //   方法一
+      let arr1 = [...arrayLike];
+      //   方法二
+      let arr2 = Array.from(arrayLike);
+      //   方法三
+      let arr3 = Array.prototype.slice.call(arrayLike);
+      //   方法四
+      let arr4 = Array.apply(null, arrayLike);
+      //   方法五
+      let arr5 = Array.prototype.concat.apply([], arrayLike);
+      console.log(arr1, arr2, arr3, arr4, arr5);
+    </script>
+  </body>
+</html>

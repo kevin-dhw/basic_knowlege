@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // https://www.bilibili.com/video/BV1L44y1z7SJ/?spm_id_from=333.337.search-card.all.click&vd_source=d02f7fbafe51d252aa68c8b37c1b048e
+        var length = 88
+        function test() {
+            console.log(this.length);
+        }
+        var obj = {
+            length: 99,
+            action: function(test) {
+                test();
+                // arguments是一个数组 调用test 数组长度为2
+                arguments[0]()
+            }
+        }
+        obj.action(test, [1,2,3])
+    </script>
+</body>
+</html>

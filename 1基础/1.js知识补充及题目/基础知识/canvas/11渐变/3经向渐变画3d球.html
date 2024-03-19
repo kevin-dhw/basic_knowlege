@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      let c1 = document.getElementById("c1");
+      let ctx = c1.getContext("2d");
+
+      let radialGradient = ctx.createRadialGradient( 250, 150, 10, 300, 200, 100);
+      radialGradient.addColorStop(0, "#ffcccc");
+      radialGradient.addColorStop(1, "red");
+      ctx.fillStyle = radialGradient;
+
+      ctx.arc(300, 200, 100, 0, Math.PI * 2);
+      ctx.fill();
+    </script>
+  </body>
+</html>

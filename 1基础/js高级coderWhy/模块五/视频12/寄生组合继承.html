@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 封装工具函数           子       父
+        // 实现寄生组合式继承       视频21分的时候没听
+        function inherit(subType, superType) {
+            // 创建一个新对象 并且这个新对象的__proto__指向构造函数Person的prototype
+            subType.prototype = Object.create(superType.prototype)
+            // console.log(obj.__proto__ === Person.prototype);
+            Object.defineProperty(subType.prototype, 'constructor', {
+                enumerable: false,
+                configurable: true,
+                writable: true,
+                value: subType
+            })
+        }
+
+        function Person(name, age) {
+            this.name = name
+            this.age = age
+        }
+        Person.prototype.eating = function () {
+            console.log('eating');
+        }
+
+        function Student(name, age, height) {
+            // 实现属性继承
+            Person.call(this, name, age)
+            this.height = height
+        }
+        // 实现方法继承
+        inherit(Student, Person)
+        Student.prototype.running = function () {
+            console.log('running');
+        }
+
+        // 实现方法继承  这时候父类的所有东西都继承过来了
+
+        var stu1 = new Student('why', 18, 1.8)
+        console.log(stu1, '111');
+        stu1.eating()
+        stu1.running()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 箭头函数柯里化
+      //  var foo = x => y => z => console.log(x + y + z);
+      // foo(1)(2)(9)
+      function foo(x, y, z) {
+        console.log(x + y + z);
+      }
+      // 自动柯里化  视频10分钟
+      function myCurrying(fn) {
+        return function curryFn(...args) {
+          if (args.length >= fn.length) {
+            fn(...args);
+          } else {
+            return function (...newArgs) {
+              return curryFn(...args.concat(newArgs));
+            };
+          }
+        };
+      }
+      var fooCurry = myCurrying(foo);
+      fooCurry(10)(20)(30);
+
+      // reduce实现
+      const fn = (...outerArgs) => {
+        return (...innerArgs) => {
+          return outerArgs.concat(innerArgs).reduce((result, item) => {
+            return result + item;
+          });
+        };
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 时间复杂度O(n)
+      let prices = [0, 1, 5, 3, 6, 4];
+      function fn(prices) {
+        // 声明一个变量来统计总利润
+        let profit = 0;
+        // 第二天开始才有利润
+        for (let i = 0; i < prices.length; i++) {
+          //  如果今天价格比昨天高
+          if (prices[i] > prices[i - 1]) {
+            // 卖掉得到利润
+            profit += prices[i] - prices[i - 1];
+          }
+        }
+        return profit;
+      }
+      console.log(fn(prices));
+    </script>
+  </body>
+</html>

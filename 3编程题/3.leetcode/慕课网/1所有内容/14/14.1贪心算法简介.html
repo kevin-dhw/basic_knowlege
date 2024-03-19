@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // g小孩子    s 饼干
+      let g = [1, 2, 3];
+      let s = [1, 2, 3, 4];
+      function findContentChildren(g, s) {
+        // 先排序
+        const sortFunc = function (a, b) {
+          return a - b;
+        };
+        g.sort(sortFunc);
+        s.sort(sortFunc);
+        let i = 0;
+        s.forEach((n) => {
+          if (n >= g[i]) {
+            // 如果第一个满足  则递增1 继续找下去
+            i++;
+          }
+        });
+        return i;
+      }
+    </script>
+  </body>
+</html>

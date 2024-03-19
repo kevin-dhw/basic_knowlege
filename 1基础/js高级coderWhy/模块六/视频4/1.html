@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 构造函数的类方法
+        function Person(name, age) {
+            this.name = name
+            this.age = age
+        }
+        // 这也叫实例方法  
+        Person.prototype.running = function() {
+            console.log('running');
+        }
+        // 类方法
+        Person.randomPerson = function() {
+            var names = ['a','b', 'c', 'd','e']
+            var randomName = names[Math.floor(Math.random()  * names.length)]
+            return new Person(randomName, Math.floor(Math.random()  * 100))
+        }
+        var p1 = new Person('why',18)
+        // 这样无法调用 new出来才可以使用
+        var p = Person.randomPerson()
+        console.log(p);
+    </script>
+</body>
+</html>

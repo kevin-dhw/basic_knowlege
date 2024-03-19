@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const bt = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 5,
+            left: null,
+            right: null,
+          },
+        },
+        right: {
+          val: 3,
+          left: {
+            val: 6,
+            left: null,
+            right: null,
+          },
+          right: {
+            val: 7,
+            left: null,
+            right: null,
+          },
+        },
+      };
+      function postOrder(root) {
+        if (!root) return;
+        postOrder(root.left);
+        postOrder(root.right);
+        console.log(root.val);
+      }
+      // postOrder(bt);
+      /*
+       比较复杂  10分
+       一个技巧：把它倒过来 根右左 利用先序的逻辑
+       访问改成入栈操作  倒过来 重新访问一下就可以
+      */
+      function postOrder2(root) {
+        if (!root) return;
+        const stack = [root];
+        const outputStack = []; //需要一个倒的栈
+        // 下面直接是 先序的代码 但是要缓存右左
+        while (stack.length) {
+          const n = stack.pop();
+          // 2.最后面推入栈中
+          outputStack.push(n);
+          // 1.换一下位置  因为倒过来是根右左
+          if (n.left) stack.push(n.left);
+          if (n.right) stack.push(n.right);
+        }
+        // 3.最后输出
+        while (outputStack.length) {
+          const n = outputStack.pop();
+          console.log(n.val);
+        }
+      }
+      postOrder2(bt);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [
+        {
+          sub: "math",
+          sorce: 80,
+        },
+        {
+          sub: "english",
+          sorce: 84,
+        },
+        {
+          sub: "chinese",
+          sorce: 80,
+        },
+      ];
+      let obj = {
+        math: 0.3,
+        english: 0.46,
+        chinese: 0.24,
+      };
+      let sum = arr.reduce((pre, next) => {
+        return pre + next.sorce * obj[next.sub];
+      }, 0);
+      console.log(+sum.toFixed(2));
+    </script>
+  </body>
+</html>

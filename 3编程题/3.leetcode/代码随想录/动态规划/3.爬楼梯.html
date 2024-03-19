@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        70  
+        1 2 3 5 8 13
+        假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+
+示例 1：
+
+输入：n = 2
+输出：2
+解释：有两种方法可以爬到楼顶。
+1. 1 阶 + 1 阶
+2. 2 阶
+示例 2：
+
+输入：n = 3
+输出：3
+解释：有三种方法可以爬到楼顶。
+1. 1 阶 + 1 阶 + 1 阶
+2. 1 阶 + 2 阶
+3. 2 阶 + 1 阶
+ 
+
+ 1.确定dp数组 
+ dp[i]  达到dp[i]有多少种方法
+ 2.确定地推公司
+ dp[i] = dp[i-1] + dp[i-2]     由前两种方法推到出来
+ 3.初始化dp数组
+ dp[0] = 1  第零阶为1步  其实是错误的  但是能跑对
+ dp[0] = 0  第零是0   正确
+ 我们可以设置  
+ dp[1] = 1
+ dp[2] = 2
+ 4.顺序  
+   前到后
+        */
+      //    其实和斐波那契一样
+      function climbStairs(n) {
+        // dp[i] 为第 i 阶楼梯有多少种方法爬到楼顶
+        // dp[i] = dp[i - 1] + dp[i - 2]
+        let dp = [1, 2];
+        for (let i = 2; i < n; i++) {
+          dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n - 1];
+      }
+      console.log(climbStairs(5));
+    </script>
+  </body>
+</html>

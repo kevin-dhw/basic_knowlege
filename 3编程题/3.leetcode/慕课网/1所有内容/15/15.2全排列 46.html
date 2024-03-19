@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      时间复杂度  递归里面for循环  
+      */
+      let arr = [1, 2, 3, 4];
+      function permute(arr) {
+        const res = [];
+        const backtrack = (path) => {
+          // 收集所有结果
+          if (path.length === arr.length) {
+            res.push(path);
+            return;
+          }
+          arr.forEach((n) => {
+            // 有一些路是死路 直接返回
+            if (path.includes(n)) return;
+            backtrack(path.concat(n));
+          });
+        };
+        backtrack([]);
+        return res;
+      }
+      console.log(permute(arr));
+    </script>
+  </body>
+</html>

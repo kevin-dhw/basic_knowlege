@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      结果是 7 5 8 6 9
+      分析：在这里面是两个promise   两个promise都有两个then的微任务
+           1. 首先5这个微任务肯定是第一执行
+           2. 5后面下面的一个promise有一个任务（8）和5同级  先执行8
+           3. 执行完8后，因为5后面有微任务，先执行它（6）
+           4. 微任务同级是先进先执行，
+     */
+      new Promise((resolve, reject) => {
+        resolve();
+      })
+        .then((res) => {
+          console.log(5);
+        })
+        .then((res) => {
+          console.log(6);
+        });
+      new Promise((resolve, reject) => {
+        console.log(7);
+        resolve();
+      })
+        .then((res) => {
+          console.log(8);
+        })
+        .then((res) => {
+          console.log(9);
+        });
+    </script>
+  </body>
+</html>

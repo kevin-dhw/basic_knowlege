@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [
+        ["A", "B"],
+        ["a", "b"],
+        [1, 2],
+      ];
+      function fn(arr) {
+        let res = arr[0].slice();
+        for (let i = 1; i < arr.length; i++) {
+          const pre = res.slice();
+          // console.log(pre, "12");
+          pre.forEach((item) => {
+            arr[i].forEach((cur) => {
+              res.push(item + cur);
+            });
+          });
+        }
+        return res;
+      }
+      console.log(fn(arr));
+    </script>
+  </body>
+</html>

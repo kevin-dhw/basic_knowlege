@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function isPromise(val) {
+        return typeof val === "function";
+      }
+      Promise.myAllSettled = function (promiseList) {
+        return new Promise((resolve, reject) => {
+          let arr = [];
+          let count = 0;
+          let setData = (index, data) => {
+            arr[index] = data;
+            count++
+            if(count === promiseList.length) {
+                resolve(arr)
+            }
+          };
+
+          for (let i = 0; i < promiseList.length; i++) {
+            let current = promiseList[i];
+            if (isPromise(current)) {
+              current.then(
+                (res) => {
+                  setData(i, { status: "fulfilled", value: res });
+                },
+                (err) => {
+                  setData(i, { status: "rejected", value: err });
+                }
+              );
+            } else {
+              // 不算promise直接走失败
+              setData(i, { status: "rejected", value: current });
+            }
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

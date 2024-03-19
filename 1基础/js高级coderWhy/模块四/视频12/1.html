@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // with语句 开发不建议使用
+        var obj = {
+            message: 'hello world'
+        }
+        // 从哪里找
+        with(obj) {
+            console.log(message);
+        }
+    </script>
+</body>
+</html>

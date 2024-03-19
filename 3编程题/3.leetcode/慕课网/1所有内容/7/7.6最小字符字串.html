@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        /*
+        时间复杂度 O(m+n) m是t的长度 n是s的长度
+        空间复杂度O(m)  有一个字典need 等于t的长度 m是t里面不同字符的个数
+        */ 
+      let s = "ADOBECODEBANC";
+      let t = "ABC";
+      function minResult(s, t) {
+        let l = 0;
+        let r = 0; //有指针
+        const need = new Map();
+        // 将需要的每个值放到map里面
+        for (let c of t) {
+          need.set(c, need.has(c) ? need.get(c) + 1 : 1);
+        }
+        let needType = need.size;
+        let res = "";
+        while (r < s.length) {
+          // 获取当前字符
+          const c = s[r];
+          //   如果当前列表在need里面
+          if (need.has(c)) {
+            // 找到了就少一个 不需要了
+            need.set(c, need.get(c) - 1);
+            // 如果等于零 就长度减一
+            if (need.get(c) === 0) needType -= 1;
+          }
+          //   所有需要的都为零 移动左边 先定义一个长度
+          while (needType === 0) {
+            // 为零可以看到想要的区间 找到最小的
+            const newRes = s.substring(l, r + 1);
+            // 找到最小的
+            if (!res || newRes.length < res.length) res = newRes;
+            // 代表左指针字符
+            const c2 = s[l];
+            // 如果左指针在需求里面 需求的数量就要增加
+            if (need.has(c2)) {
+              need.set(c2, need.get(c2) + 1);
+              //   needTYpe也要加1
+              if (need.get(c2) === 1) needType += 1;
+            }
+            l += 1;
+          }
+          r += 1;
+        }
+        return res;
+      }
+      console.log(minResult(s, t));
+    </script>
+  </body>
+</html>

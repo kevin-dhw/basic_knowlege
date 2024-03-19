@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.初始化
+      function initWatch(vw) {
+        let watch = vm.$options.watch;
+        for (let k in watch) {
+          //用户自定义watch的写法可能是数组 对象 函数 字符串
+          const handler = watch[k];
+          if (Array.isArray(handler)) {
+            handler.forEach((handle) => {
+              createWatcher(vm, k, handle);
+            });
+          } else {
+            createWatcher(vm, k, handle);
+          }
+        }
+      }
+      //   2. 初始化后 利用$watch创建watcher
+      function createWatcher(vm, exprOrFn, handler, options = {}) {
+        if (typeof handler === "object") {
+          options = handler; //保存用户传入的对象
+          handler = handler.handler; //这个代表真正用户传入的函数
+        }
+        if (typeof handler === "string") {
+          //   代表传入的是定义好的methods方法
+          handler = vm[handler];
+        }
+        //   调用vm.$watch创建用户watcher
+        return vm.$watch(exprOrFn, handler, options);
+      }
+      //   3. $watch创建watcher
+      Vue.prototype.$watch = function (exprOrFn, cb, options) {
+        const vm = this;
+        //  user: true 这里表示是一个用户watcher
+        let watcher = new Watcher(vm, exprOrFn, cb, { ...options, user: true });
+        // 如果有immediate属性 代表需要立即执行回调
+        if (options.immediate) {
+          cb(); //如果立刻执行
+        }
+      };
+      //   4. watcher的改造
+      class Watcher {
+        constructor(vm, exprOrFn, options, cb) {
+          if (typeof exprOrFn === "string") {
+            this.getter = function () {
+              return vm[exprOrFn];
+            };
+          } else {
+            this.getter = exprOrFn; // getter意味着调用这个函数可以发生取值操作
+          }
+
+          // 监听器watcher 用到的属性
+          this.user = options.user; // 标识是否是用户自己的watcher
+          this.deep = options.deep;
+          this.cb = cb;
+          this.value = this.get(); // 存储 get返回值
+        }
+
+        get() {
+          pushTarget(this);
+          let value = this.getter.call(this.vm);
+          this.deep && JSON.stringify(value); // 深度监听
+          popTarget();
+          return value;
+        }
+        // 重新渲染
+        update() {
+          queueWatcher(this); // 把当前的watcher 暂存起来，异步队列渲染
+        }
+        // queueWatcher 内部执行 run 方法
+        run() {
+          let oldValue = this.value;
+          let newValue = (this.value = this.get());
+          if (this.user) {
+            this.cb.call(this.vm, newValue, oldValue);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

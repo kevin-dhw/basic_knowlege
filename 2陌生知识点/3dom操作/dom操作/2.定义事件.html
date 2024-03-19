@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="cs">测试</button>
+    <div id="time">time: 123</div>
+    <button class="btn">移除</button>
+    <script>
+      // 获取节点方法
+      let time = document.getElementById("time"); // 通过id
+      //   定义事件
+      time.addEventListener("click", function () {
+        console.log(123);
+      });
+
+      let btn = document.getElementsByClassName("btn");
+      //   移除事件
+      //   btn.removeEventListener("click", alert("已经移除"));
+      //   console.log(time);
+
+      //   定义事件方法二
+      let cs = document.getElementsByClassName("cs");
+      console.log(cs, "cs");
+      cs.onclick = function () {
+        alert("123");
+      };
+      let aaaaaa = 10;
+    </script>
+  </body>
+</html>

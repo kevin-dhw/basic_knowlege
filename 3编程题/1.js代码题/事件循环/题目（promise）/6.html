@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   解释
+      console.log("start"); //1
+      setTimeout(function () {
+        console.log("setTimeout1");
+        new Promise(function (resolve) {
+          resolve();
+        }).then(function () {
+          console.log("then4");
+        });
+        console.log("then2");
+      });
+
+      new Promise(function (resolve) {
+        console.log("promise1"); //2
+        resolve();
+      }).then(function () {
+        console.log("then1"); //5
+      });
+
+      setTimeout(function () {
+        console.log("setTimeout2");
+      });
+
+      console.log(2); //3
+
+      queueMicrotask(() => {
+        console.log("queueMicrotask1"); //6
+      });
+
+      new Promise(function (resolve) {
+        resolve();
+      }).then(function () {
+        console.log("then3"); //7
+      });
+      console.log("end"); //4
+    </script>
+  </body>
+</html>

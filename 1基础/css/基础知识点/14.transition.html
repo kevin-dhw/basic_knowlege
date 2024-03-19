@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition: 2s;
+        }
+        .box:hover{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <!--   
+        
+        transition-property用来指定过渡动画的CSS属性名称，
+        而这个过渡属性只有具备一个中点值的属性（需要产生动画的属性）才能具备过渡效果，其对应具有过渡的CSS属性主要有
+        
+        transition: all 2s ease 0s;
+            /* 采用以下分属性也是可以的 */
+            transition-duration: 2s;
+            transition-property: all;
+            transition-timing-function: ease;
+            transition-delay: 0s; -->
+</body>
+</html>

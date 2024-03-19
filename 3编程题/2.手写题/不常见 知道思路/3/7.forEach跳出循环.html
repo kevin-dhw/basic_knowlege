@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 4];
+      //   跳出forEach 等于一个条件的时候 后面不再执行
+      //   使用break会报错， 因为里面是函数 不是for循环
+      //   arr.forEach((item) => {
+      //     if (item === 2) {
+      //       return;
+      //     }
+      //   });
+
+      //   方法一
+      let key = null;
+      try {
+        arr.forEach((item) => {
+          if (item === 2) {
+            key = item;
+            throw Error();
+          }
+          console.log(item);
+        });
+      } catch {}
+      //   console.log(key);
+    </script>
+  </body>
+</html>

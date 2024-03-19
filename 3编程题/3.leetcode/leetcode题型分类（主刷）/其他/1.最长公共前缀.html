@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        示例 1：
+        输入：strs = ["flower","flow","flight"]
+        输出："fl"
+        示例 2：
+        输入：strs = ["dog","racecar","car"]
+        输出：""
+        解释：输入不存在公共前缀。
+      */
+      let strs = ["flower", "flow", "flight"];
+      function fn(strs) {
+        let res = "";
+        for (let i = 0; i < strs[0].length; i++) {
+          for (let j = 1; j < strs.length; j++) {
+            if (strs[j][i] !== strs[0][i]) return res;
+          }
+          res += strs[0][i];
+        }
+        return res;
+      }
+      console.log(fn(strs));
+    </script>
+  </body>
+</html>

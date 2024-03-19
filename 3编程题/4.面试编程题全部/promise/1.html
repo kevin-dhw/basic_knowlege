@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        实现一个自定义定时器，可以传入a，b。
+        第一次执行在 a 秒后，之后执行都是 b 秒后 
+        */
+      function interVal(a) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log(`${a} 秒后`);
+            resolve();
+          }, a * 1000);
+        });
+      }
+      async function timeout(a, b) {
+        await interVal(a);
+        setInterval(() => {
+          console.log(`都是${b} 秒后`);
+        }, b * 1000);
+      }
+      timeout(3, 2);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var names = ['a', 'b', 'c', 'd']
+        var obj = { name: 'jack', age: 18, height: 1.8 }
+
+        // 解构
+        var [name1, name2, name3] = names
+        var { name, age, height } = obj
+        // 对变量重命名
+        var { name: Wname, address: Waddress = '中国'} = obj
+        console.log(obj);
+    </script>
+</body>
+
+</html>

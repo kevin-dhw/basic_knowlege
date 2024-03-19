@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      // 1.找到画布
+      let c1 = document.getElementById("c1");
+      // 2.获取画笔，上下文对象
+      let ctx = c1.getContext("2d");
+      ctx.font = "30px Microsoft YaHei";
+      // 文本对齐选项  水平居中 默认start end left right center
+      ctx.textAlign = "center";
+      // 文本基线对齐 top bottom alphabetic
+      ctx.textBaseline = "middle";
+      // 文本的方向 右到左rtl
+      ctx.direction = "rtl";
+      // 预测量文本宽度
+      let text = ctx.measureText("Hello");
+      console.log(text);
+      ctx.strokeText("Hello", 200, 200);
+      ctx.arc(300, 200, 5, 0, Math.PI * 2);
+      ctx.fill();
+    </script>
+  </body>
+</html>

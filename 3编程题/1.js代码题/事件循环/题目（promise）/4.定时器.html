@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 视频12分钟开始
+      // 1.打印
+      //   setTimeout(function () {
+      //     console.log("setTimeout1"); // 1.直接打印
+      //     new Promise(function (resolve) {
+      //       resolve();  // 2.resolve会把下面的then放进微任务里面 如果没有resolve then不执行
+      //     }).then(function () {
+      //       console.log("then4"); // 4.最下面end是宏任务 执行宏任务前会先执行微任务
+      //     });
+      //     console.log("then2"); //3.这里会直接执行 相当于同步
+      //   });
+      //   setTimeout(() => {
+      //     console.log("end");
+      //   });
+      const promise1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("success");
+          console.log("timer1");
+        }, 1000);
+        console.log("promise1里的内容");
+      }).then(() => {
+        console.log("11");
+      });
+    </script>
+  </body>
+</html>

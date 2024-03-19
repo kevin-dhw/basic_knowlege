@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // promise的基本使用使用  工作基本就使用这些
+        function execCode(counter) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (counter <= 0) { //失败
+                        reject('失败')
+                    } else { // 成功
+                        let total = 0
+                        for (let i = 0; i < counter; i++) {
+                            total++
+                        }
+                        resolve(total)
+                    }
+
+                }, 2000)
+            })
+        }
+        execCode(100).then((value) => {
+            console.log(value);
+        }).catch((err) => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

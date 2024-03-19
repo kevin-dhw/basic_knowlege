@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /*
+        async1的  await及后面转换代码
+         new Promise(resolve => {
+           setTimeout(() => {
+            console.log("timer2");
+          }, 0);
+          console.log("async2");
+          resolve()
+        }).then(res =>
+          console.log("async1 end");
+          setTimeout(() => {
+            console.log("timer1");
+          }, 0);
+        )
+        */
+      async function async1() {
+        console.log("async1 start");
+        await async2();
+        console.log("async1 end");
+        setTimeout(() => {
+          console.log("timer1");
+        }, 0);
+      }
+      async function async2() {
+        setTimeout(() => {
+          console.log("timer2");
+        }, 0);
+        console.log("async2");
+      }
+      async1();
+      setTimeout(() => {
+        console.log("timer3");
+      }, 0);
+      console.log("start");
+      /*
+      打印
+      srcipt start
+      async1 start
+      promise1
+      async1 success
+      srcipt end
+      promise1 resolve
+      async1 end
+
+      微任务
+      37
+
+
+      宏任务
+      */
+    </script>
+  </body>
+</html>

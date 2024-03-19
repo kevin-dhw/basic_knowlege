@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person() {
+
+        }
+        // 重写原型对象  但是没有constructor 可以手动加上去 没有必要
+        Person.prototype = {
+            message: 'hello word',
+            constructor: Person
+        }
+        // 默认的Person.prototype获取keys不会有 constructer 
+        // 重写的会有
+        console.log(Object.keys(Person.prototype));
+        console.log(Person.prototype);
+
+        var p1 = new Person()
+        console.log(p1.message);
+    </script>
+</body>
+</html>

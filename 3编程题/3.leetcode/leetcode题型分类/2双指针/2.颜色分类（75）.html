@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 输入：nums = [2,0,2,1,1,0]
+         输出：[0,0,1,1,2,2]
+       * @param {number[]} nums
+       * @return {void} Do not return anything, modify nums in-place instead.
+       */
+      //  0、 1 和 2 分别表示红色、白色和蓝色。
+      // 我们可以设置 3 个指针，一个指向头部，一个指向尾部，还有一个指向当前遍历的元素。
+      // 我们从头部开始遍历数组，如果遇到 0（红色）就把它放到头部指针的位置，
+      // 如果遇到 2（蓝色）就把它放到尾部指针的位置。
+      // 如果遇到 1（白色），就跳过它，继续遍历。
+      let nums = [0, 1, 2, 1, 0, 2];
+      function sortColors(nums) {
+        let left = 0;
+        // nums.length -1 表示最后一位
+        let right = nums.length - 1;
+        for (let i = 0; i <= right; i++) {
+          if (nums[i] === 0) {
+            swap(nums, i, left);
+            left++;
+          } else if (nums[i] === 2) {
+            swap(nums, i, right);
+            right--;
+            i--;
+          }
+        }
+        return nums;
+      }
+
+      function swap(nums, i, j) {
+        const temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+      }
+      console.log(sortColors(nums));
+    </script>
+  </body>
+</html>

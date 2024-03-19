@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function foo(m, n, ...argus) {
+            // 将arguments 转为数组  方法一
+            var argusArr = []
+            for (var arg of arguments) {
+                argusArr.push(arg)
+            }
+            // 方法二 from里面必须是可迭代对象 
+            var argusArr2 = Array.from(arguments)
+            var argusArr2 = [...arguments]
+
+            // 方法三  视频20分钟左右 
+            // 加[]是为了拿到slie这个方法 下面的也一样
+            var argusArr3 = [].slice.apply(arguments)
+            var argusArr3 = Array.prototype.slice.apply(arguments)
+            console.log(argusArr3);
+
+        }
+        foo(10, 20, 30, 40)
+
+    </script>
+</body>
+
+</html>

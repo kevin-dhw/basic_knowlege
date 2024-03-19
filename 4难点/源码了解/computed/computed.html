@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- https://juejin.cn/post/7220020535299539002?searchId=20230802101631C4552E6D85806F7735CC#heading-1 -->
+    <script>
+      // 1.初始化
+      function initComputed(vm) {
+        const computed = vm.$options.computed;
+        // 定义一个计算属性的watcher
+        const watchers = (vm.computedWatcher = {});
+        for (let k in computed) {
+          const userDef = computed[k];
+          //   创建属性给计算属性使用
+          const getter = typeof userDef === "function" ? userDef : userDef.get;
+          //   创建计算watcher lazy设置为true
+          watcher[k] = new Watcher(vm, getter, () => {}, { lazy: true });
+          defineComputed(vm, k, userDef);
+        }
+      }
+      //   2.对计算属性进行劫持
+      // 定义普通对象用来劫持计算属性
+      const sharedPropertyDefinition = {
+        enumerable: true,
+        configurable: true,
+        get: () => {},
+        set: () => {},
+      };
+      // 重新定义计算属性  对get和set劫持
+      function defineComputed(target, key, userDef) {
+        if (typeof userDef === "function") {
+          // 如果是一个函数  需要手动赋值到get上
+          sharedPropertyDefinition.get = createComputedGetter(key);
+        } else {
+          sharedPropertyDefinition.get = createComputedGetter(key);
+          sharedPropertyDefinition.set = userDef.set;
+        }
+        //   利用Object.defineProperty来对计算属性的get和set进行劫持
+        Object.defineProperty(target, key, sharedPropertyDefinition);
+      }
+      // 重写计算属性的get方法 来判断是否需要进行重新计算 dirty为true不用修改
+      function createComputedGetter(key) {
+        return function () {
+          const watcher = this._computedWatchers[key]; //获取对应的计算属性watcher
+          if (watcher) {
+            if (watcher.dirty) {
+              watcher.evaluate(); //计算属性取值的时候 如果是脏的  需要重新求值
+            }
+            return watcher.value;
+          }
+        };
+      }
+
+      //   3.对watcher进行改造
+      class Watcher {
+        constructor(vm, exprOrfn, cb, options) {
+          this.dirty = options.dirty;
+          // 非计算属性实例化就会默认调用get方法 进行取值  保留结果 计算属性实例化的时候不会去调用get
+          this.value = this.lazy ? undefined : this.get();
+        }
+        get() {
+          /*
+          计算属性在这里执行用户定义的get函数 访问计算属性的依赖项 
+          从而把自身计算Watcher添加到依赖项dep里面收集起来
+          */
+          pushTarget(this);
+          const res = this.getter.call(this.vm);
+          // 在调用方法之后把当前watcher实例从全局Dep.target移除
+          popTarget();
+          return res;
+        }
+        update() {
+          // 计算属性依赖的值发生变化 只需要把dirty置为true  下次访问到了重新计算
+          if (this.dirty) {
+            this.dirty = true;
+          } else {
+            // 每次watcher进行更新的时候  可以让他们先缓存起来  之后再一起调用
+            // 异步队列机制
+            queueWatcher(this);
+          }
+        }
+        evaluate() {
+          this.value = this.get();
+          this.dirty = false;
+        }
+        depend() {
+          // 计算属性的watcher存储了依赖项的dep
+          let i = this.deps.length;
+          while (i--) {
+            // //调用依赖项的dep去收集渲染watcher
+            this.deps[i].depend();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

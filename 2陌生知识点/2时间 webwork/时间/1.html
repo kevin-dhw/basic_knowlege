@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let date = new Date();
+      let y = date.getFullYear();
+      let m = date.getMonth() + 1;
+      let d = date.getDate(); //当前日期
+      let day = date.getDay(); //当前星期
+      //   获取当前月有多少天
+      console.log(new Date(y, m, 0).getDate());
+      //   获取当前时间戳
+      console.log(date.getTime());
+      //   获取指定时间时间戳 格式字符串 'YYYY-MM-DD HH:MM:SS'
+      console.log(new Date("2023-6-27").getTime());
+    </script>
+  </body>
+</html>

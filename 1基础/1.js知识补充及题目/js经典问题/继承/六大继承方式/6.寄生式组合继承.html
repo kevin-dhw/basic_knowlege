@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        /*
+        借用 构造函数继承属性 ，通过原型链的混成形式来继承方法
+        */
+      function Parent(name) {
+        this.name = name;
+        this.say = () => {0
+          console.log(111);
+        };
+      }
+      Parent.prototype.play = () => {
+        console.log(222);
+      };
+      function Children(name) {
+        Parent.call(this);
+        this.name = name;
+      }
+      Children.prototype = Object.create(Parent.prototype);
+      Children.prototype.constructor = Children;
+    </script>
+  </body>
+</html>

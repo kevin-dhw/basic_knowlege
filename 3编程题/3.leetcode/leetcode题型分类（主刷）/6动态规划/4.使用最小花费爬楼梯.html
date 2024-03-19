@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        746
+        cost = [10,15,20]
+        cost = [1,100,1,1,1,100,1,1,100,1]
+        1.dp数组的定义
+        dp[i] 到达最顶部的所需最小花费
+        2.地推公式
+         可以跳一步 可以跳两步加起来  dp[i-1] + dp[i-2]
+         他们需要的花费是   视频8分钟
+          dp[i-1]: dp[i-1] + const[i-1]   
+          dp[i-2]: dp[i-2] + const[i-2]   
+          因为dp[i-1]下面的值是最小花费  如果跳上去还要花费cost[i-1]（对应的值为向上跳需要的花费）
+         dp[i] = Math.min(dp[i-1] + const[i-1],  dp[i-2] + const[i-2])
+        3.初始化dp
+        因为只有跳的一刻才需要花费，所以站在哪里都是0  
+        dp = [0, 0]
+        4.确定遍历顺序
+        向后
+        */
+      cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1];
+      function fn(cost) {
+        let n = cost.length;
+        let dp = [0, 0];
+        for (let i = 2; i <= n; i++) {
+          dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+        }
+        console.log(dp);
+        return dp[n];
+      }
+      console.log(fn(cost));
+    </script>
+  </body>
+</html>

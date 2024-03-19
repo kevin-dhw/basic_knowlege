@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 20题
+      /*
+    map不会随着增加而增加，是常量的  所以是O(1)
+    stack是O(n)
+    */
+      let param = "{[]}]";
+      function isValid(param) {
+        if (param.length % 2 === 1) return false;
+        const stack = [];
+        const map = new Map();
+        map.set("(", ")");
+        map.set("[", "]");
+        map.set("{", "}");
+        for (let i = 0; i < param.length; i++) {
+          const c = param[i];
+          // 遇到左括号 推入栈中
+          if (map.has(c)) {
+            stack.push(c);
+          } else {
+            // 获取顶栈的值
+            const t = stack[stack.length - 1];
+            // 遇到右括号，判断和栈顶是否相等
+            if (map.get(c) === t) {
+              // 相等删除栈顶元素
+              stack.pop();
+            } else {
+              return false;
+            }
+          }
+        }
+        // 栈空了就是有效的括号
+        return stack.length === 0;
+      }
+      console.log(isValid(param));
+    </script>
+  </body>
+</html>

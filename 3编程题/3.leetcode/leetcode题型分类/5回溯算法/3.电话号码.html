@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        17  https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
+        */
+      var letterCombinations = function (digits) {
+        const k = digits.length;
+        const map = [
+          "",
+          "",
+          "abc",
+          "def",
+          "ghi",
+          "jkl",
+          "mno",
+          "pqrs",
+          "tuv",
+          "wxyz",
+        ];
+        if (!k) return [];
+        if (k === 1) return map[digits].split("");
+        const res = [],
+          path = [];
+        backtracking(0);
+        return res;
+
+        function backtracking(a) {
+          if (path.length === k) {
+            res.push(path.join(""));
+            return;
+          }
+          for (const v of map[digits[a]]) {
+            path.push(v);
+            backtracking(a + 1);
+            path.pop();
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

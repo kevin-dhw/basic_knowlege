@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        https://juejin.cn/post/6844903825006919694
+        
+        ES6为Array增加了fill()函数，使用制定的元素填充数组，其实就是用默认内容初始化数组。
+        该函数有三个参数。
+        sql复制代码arr.fill(value, start, end)
+        value：填充值。
+        start：填充起始位置，可以省略。
+        end：填充结束位置，可以省略，实际结束位置是end-1。
+        */
+      Array.prototype.myFill = function (value, start = 0, end) {
+        end = end || this.length;
+        for (let i = start; i < end; i++) {
+          this[i] = value;
+        }
+        return this;
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 箭头函数不能作为构造函数  不能new
+        var fun = () => {
+            console.log('123', this);
+        }
+        // fun();
+        // 箭头函数返回值是一个对象 对象必须加()
+        // react里面经常用
+        let fnArrow = () => ({ name: 'jack' })
+        console.log(fnArrow());
+        // 求偶数平方和
+        let arr = [2, 3, 4, 5]
+        let result = arr.filter(item => item % 2 === 0)
+            .map(item => item * item)
+            .reduce((pre, acc) => pre + acc, 0)
+        console.log(result);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 组合函数的概念  一个函数处理不了  连续调用两个函数
+      var num = 200;
+      function double(num) {
+        return num * 2;
+      }
+      function pow(num) {
+        return num ** 2;
+      }
+      function composeFn(...fns) {
+        if (fns.length <= 0) return;
+        for (var fn of fns) {
+          if (typeof fn !== "function") {
+            throw new Error("fn must be function");
+          }
+        }
+
+        return function (...args) {
+          var result = fns[0].apply(this, args);
+          for (var i = 1; i < fns.length; i++) {
+            var fn = fns[i];
+            result = fn.apply(this, [result]);
+          }
+          return result;
+        };
+      }
+      var newFn = composeFn(double, pow);
+      console.log(newFn(10));
+    </script>
+  </body>
+</html>

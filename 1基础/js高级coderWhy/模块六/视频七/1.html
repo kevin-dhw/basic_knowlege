@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6 class 类 和es5的构造函数一样
+        class Person {
+            constructor(name,age) {
+                this.name = name
+                this.age = age
+            }
+            running() {
+                console.log('running');
+            }
+            eating() {
+                console.log('eating');
+            }
+        }
+        var p = new Person('why', 20)
+        console.log(Person.prototype === p.__proto__);
+        console.log( typeof Person); // function
+    </script>
+</body>
+</html>

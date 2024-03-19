@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = 'window'
+        function Person(name) {
+            this.name = name
+            this.foo1 = function () {
+                console.log(this.name);
+            },
+            this.foo2 = () => console.log(this.name);
+            this.foo3 = function () {
+                return function () {
+                    console.log(this.name);
+                }
+            },
+                this.foo4 = function () {
+                    return () => {
+                        console.log(this.name);
+                    }
+                }
+        }
+        var person1 = new Person('person1')
+        var person2 = new Person('person2')
+
+        person1.foo1()
+        person1.foo1.call(person2)
+
+        person1.foo2()
+        // foo2是箭头函数 call无法起作用 this还是指向前面的person1
+        person1.foo2.call(person2) 
+        
+        //两次调用的 这里person1.foo3()会返回一个函数  后面在调用 所以指向window(默认绑定)
+        person1.foo3()() 
+        // 这里person1.foo3.call(person2)使this指向person2，后面返回一个函数 但后面是默认调用 所以再次调用this指向window
+        person1.foo3.call(person2)()
+        // person1.foo3()返回一个函数  然后call调用 使函数this指向person2
+        person1.foo3().call(person2)
+        
+        // person1.foo4()会让foo4这个函数this指向person1 在调用返回的箭头函数 this往上面找 this指向 person1
+        person1.foo4()()
+        // person1.foo4.call(person2) 使foo4这个函数绑定person2 再调用箭头函数this往上级找 所以指向person2
+        person1.foo4.call(person2)()
+        // person1.foo4()使foo4函数指向 peron1 返回的箭头函数call不起作用 this指向上级person1
+        person1.foo4().call(person2)
+    </script>
+</body>
+
+</html>

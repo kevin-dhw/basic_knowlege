@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      let nums = [1, 2, 2];
+      function fn(nums) {
+        let result = [];
+        let path = [];
+        let len = nums.length;
+        let used = new Array(len).fill(false);
+        function backTrace() {
+          if (path.length === len) {
+            result.push([...path]);
+            return;
+          }
+          for (let i = 0; i < len; i++) {
+            if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) continue;
+            if (!used[i]) {
+              path.push(nums[i]);
+              used[i] = true;
+              backTrace();
+              path.pop();
+              used[i] = false;
+            }
+          }
+        }
+        backTrace();
+        return result;
+      }
+      console.log(fn(nums));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1.父元素overflow: hidden 触发bfc*/
+        .parent {
+            background-color: red;
+            /* overflow: hidden; */
+        }
+
+        .child {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            float: right;
+        }
+
+        /* 2.  使用after伪元素  给要清楚的父元素加上这段带啊吗*/
+        .clearfix:after {
+            /*伪元素是行内元素 正常浏览器清除浮动方法*/
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        /* 3.使用before after双重伪元素 */
+        .clearfix2:after,
+        .clearfix2:before {
+            content: "";
+            display: table;
+        }
+        .clearfix2:after {
+            clear: both;
+        }
+        .clearfix2 {
+            *zoom: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent clearfix2">
+        <div class="child"></div>
+    </div>
+</body>
+
+</html>

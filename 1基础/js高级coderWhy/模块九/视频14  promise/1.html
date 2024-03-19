@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 异步处理代码的逻辑
+        function execCode(counter, successCallback, fallCallback) {
+            setTimeout(() => {
+                if (counter <= 0) { //失败
+                    fallCallback('失败')
+                } else { // 成功
+                    let total = 0
+                    for (let i = 0; i < 10; i++) {
+                        total++
+                    }
+                    successCallback(total)
+                }
+
+            }, 2000)
+        }
+        // 传入一个回调  做完给的提示 成功了
+        execCode(-1, (total) => {
+            console.log('成功了', total);
+        }, (err) => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

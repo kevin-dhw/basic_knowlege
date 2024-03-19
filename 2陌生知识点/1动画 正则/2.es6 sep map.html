@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  set 不重复
+
+      let arr = new Set([1, 1, 2, 3]);
+      // 添加属性
+      arr.add(4);
+      // size长度
+      console.log(arr.size, "arr");
+
+      // 四个属性 set get has delete
+      let map = new Map();
+      map.set("1", 1);
+      map.set(2, "2");
+      map.set("3", "3");
+      map.set(4, 4);
+      //   map.delete("3");
+      console.log(map);
+      // console.log(map.get("3"));
+      console.log(map.keys()); //获取所有key值
+      // 获取keys的第一个值  只用在key 里面是map类型 value代表key的值
+      console.log(map.keys().next());
+    </script>
+  </body>
+</html>

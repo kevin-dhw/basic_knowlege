@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 将父类的实例作为子类的原型
+      // 父类
+      function SuperType() {
+        this.name = "SuperType"; // 父类属性
+      }
+      SuperType.prototype.sayName = function () {
+        // 父类原型方法
+        return this.name;
+      };
+      // 子类
+      function SubType() {
+        this.subName = "SubType"; // 子类属性
+      }
+    //   子类的方法必须放到继承下面 ***
+      SubType.prototype.saySubName = function () {
+        // 子类原型方法
+        return this.subName;
+      };
+      /*
+      实现继承    利用原型，让一个应用类型继承另一个的属性和方法
+
+       缺点： 1  子类的方法必须放到继承下面
+             2   父类的所有属性都会被new出来的子类共享
+             3   无法向父级传参
+      */
+
+      SubType.prototype = new SuperType();
+    </script>
+  </body>
+</html>
+
+        追问4： 你在你的

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      131 https://www.bilibili.com/video/BV1c54y1e7k6/?spm_id_from=333.788&vd_source=d02f7fbafe51d252aa68c8b37c1b048e
+
+      给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。
+
+回文串 是正着读和反着读都一样的字符串。
+
+ 
+
+示例 1：
+
+输入：s = "aab"
+输出：[["a","a","b"],["aa","b"]]
+示例 2：
+
+输入：s = "a"
+输出：[["a"]]
+      */
+      //  17分钟解释
+      const isPalindrome = (s, l, r) => {
+        // for (let i = l, j = r; i < j; i++, j--) {
+        //   if (s[i] !== s[j]) return false;
+        // }
+        while (r > l) {
+          if (s[r] !== s[l]) return false;
+          r--;
+          l++;
+        }
+        return true;
+      };
+      let s = "aabaa";
+      var partition = function (s) {
+        const res = [],
+          path = [],
+          len = s.length;
+        backtracking(0);
+        return res;
+        function backtracking(i) {
+          // 到字符串最后  说明结束了
+          if (i >= len) {
+            res.push(Array.from(path));
+            return;
+          }
+          for (let j = i; j < len; j++) {
+            if (!isPalindrome(s, i, j)) continue;
+            path.push(s.slice(i, j + 1));
+            backtracking(j + 1);
+            path.pop();
+          }
+        }
+      };
+      console.log(partition(s));
+    </script>
+  </body>
+</html>

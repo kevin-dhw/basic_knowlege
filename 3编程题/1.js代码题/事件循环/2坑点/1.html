@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        https://juejin.cn/post/7142690757722243102
+        58一面
+
+        注意点
+        promise1和promise2是一起执行的
+        中间的resolve对他没影响  这一点和await区分
+        resolve是定时器对他也没影响
+        */
+      new Promise(function (resolve) {
+        console.log("promise1");
+        resolve();
+        console.log("promise2");
+      }).then(function () {
+        console.log("promise3");
+      });
+    </script>
+  </body>
+</html>

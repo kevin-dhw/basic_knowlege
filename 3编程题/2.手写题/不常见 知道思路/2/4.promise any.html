@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        2:10
+        https://www.bilibili.com/video/BV1GU4y1q7DM?p=2&vd_source=d02f7fbafe51d252aa68c8b37c1b048e
+        */
+      /*
+        将多个promise包装成一个promise 
+        一个成功算成功   全部失败算失败
+        */
+      Promise.myAny = (promiseList) => {
+        return new Promise((resolve, reject) => {
+          let count = 0;
+          for (let i = 0; i < promiseList; i++) {
+            promiseList[i]
+              .then((res) => {
+                resolve(res);
+              })
+              .catch((err) => {
+                count++;
+                if (count === promiseList.length) {
+                  reject("全部失败");
+                }
+              });
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

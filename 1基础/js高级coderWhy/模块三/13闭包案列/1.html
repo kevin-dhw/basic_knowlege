@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createAdder(count) {
+            return function adder(num) {
+                return count + num
+            }
+        }
+        var adder5 = createAdder(5)
+        console.log(adder5(20));
+        var adder8 = createAdder(8)
+        console.log(adder8(20));
+    </script>
+</body>
+</html>

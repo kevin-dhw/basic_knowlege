@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var fn = () => {
+            console.log('fn', this);
+        }
+        // 通过apply调用时 也是没有this this还是指向window
+        fn.apply('aaaa')
+
+        // // 2. this的查找规则
+        // var obj = {
+        //     name: 'obj',
+        //     foo: function () {
+        //         var bar = () => {
+        //             console.log('bar', this);
+        //         }
+        //         return bar
+        //     }
+        // }
+
+        //  // fun是对象调用的 this指向obj
+        // var fun = obj.foo()
+        // //  fun是箭头函数 apply无法改变箭头函数的this
+        // fun.apply('bbb')
+
+        // 2. this的查找规则 对象不是作用域 作用域只有函数和window
+        //  把foo改成箭头函数  这时打印的this指向window`
+        var message = 'message global'
+        var obj = {
+            message: 'message obj',
+            name: 'obj',
+            foo: () => {
+                //  message按作用域找 不会找对象的 这里面如果不是箭头函数this指向obj 
+                // 打印this.message 会等于 message global
+                console.log(message, this);
+                var bar = () => {
+                    console.log('bar', this);
+                }
+                return bar
+            }
+        }
+
+        // fun是对象调用的 this指向obj
+        var fun = obj.foo()
+        //  fun是箭头函数 apply无法改变箭头函数的this
+        fun.apply('bbb')
+
+
+
+        // 
+    </script>
+</body>
+
+</html>

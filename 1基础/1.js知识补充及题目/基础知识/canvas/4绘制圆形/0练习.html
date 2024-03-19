@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      let c1 = document.getElementById("c1");
+      let ctx = c1.getContext("2d");
+
+      let heartPath = new Path2D();
+      heartPath.moveTo(300, 200);
+      heartPath.bezierCurveTo(350, 150, 400, 200, 300, 250);
+      heartPath.bezierCurveTo(200, 200, 250, 150, 300, 200);
+      ctx.fillStyle = "yellow";
+      ctx.strokeStyle = "blue";
+      ctx.stroke(heartPath);
+      ctx.fill(heartPath);
+    </script>
+  </body>
+</html>

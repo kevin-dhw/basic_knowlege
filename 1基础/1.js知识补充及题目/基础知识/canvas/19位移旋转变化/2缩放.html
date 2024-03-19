@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      let c1 = document.getElementById("c1");
+      let ctx = c1.getContext("2d");
+      //x多少倍   y多少倍
+      ctx.scale(2, 3);
+      ctx.fillRect(0, 0, 50, 50);
+    </script>
+  </body>
+</html>

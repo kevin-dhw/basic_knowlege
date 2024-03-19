@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 当没有参数  按字母顺序排序
+      let arr1 = ["a", "c", "ab", "b"];
+      console.log(arr1.sort()); //   ['a', 'ab', 'b', 'c']
+
+      //   数字会转成字符串比较
+      let arr2 = [12, 11, 0, 2, 1];
+      console.log(arr2.sort()); //  [0, 1, 11, 12, 2]
+
+      //   也可以自己传入函数定义方法
+      let arr = [3, 1, 2, 5];
+      //   a是第二个参数   b是第一个参数
+      let newarr = arr.sort((a, b) => {
+        /*
+        可以将a理解成newValue b理解成oldValue
+        a b 表示两个相邻的值
+        诺a-b>0  升序
+        否则降序
+        */
+        console.log(a - b, "11");
+        return a - b;
+      });
+      console.log(newarr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        坑点：
+          1.因为 await后面的promise没有执行（执行resolve, reject）
+          *** 所以promise下面的代码不会执行（不打印 async1 success）
+          *** 25行因为await后面的promise也不会执行（没有resolved）
+        */
+      async function async1() {
+        console.log("async1 start");
+        await new Promise((resolve) => {
+          console.log("promise1");
+        });
+        console.log("async1 success");
+        return "async1 end";
+      }
+      console.log("srcipt start");
+      async1().then((res) => console.log(res, "11"));
+      console.log("srcipt end");
+      /*
+          打印
+          srcipt start
+          async1 start
+          promise1
+          srcipt end
+
+       */
+    </script>
+  </body>
+</html>

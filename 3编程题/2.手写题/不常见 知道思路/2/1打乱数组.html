@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [3, 2, 1, 5];
+      // 方法一
+      // const shuffle = (arr) => {
+      //   return arr.sort(() => {
+      //     return Math.random() > 0.5 ? 1 : -1;
+      //   });
+      // };
+      // console.log(shuffle(arr));
+      //   方法二
+      let arr2 = [3, 6, 1, 7];
+      const shuffle2 = (arr) => {
+        let i = arr.length - 1;
+        while (i) {
+          let j = Math.floor(Math.random() * i);
+          [arr[j], arr[i]] = [arr[i], arr[j]];
+          i--;
+        }
+        return arr;
+      };
+      console.log(shuffle2(arr2), "22");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = "2344545665664566566";
+      let b = "2344545665664566566";
+      // 整数 -》 字符串 =》 数组
+      // 数组每一位元素进行相加 + 进位 》 10取个位 进位 = 1
+      // 数组每一位元素进行相加 + 进位 《 10取个位 进位 = 0
+      // 最后一位,仍然有进位,进位添加到结果里
+      console.log(a + b);
+      function bigNumSum(str1, str2) {
+        const arr1 = str1.split("").reverse();
+        const arr2 = str2.split("").reverse();
+        const length = Math.max(arr1.length, arr2.length);
+        const result = [];
+        // 进位
+        let flag = 0;
+        for (let i = 0; i < length; i++) {
+          // 两个数长度不一样 给个默认值0
+          const num1 = Number(arr1[i]) || 0;
+          const num2 = Number(arr2[i]) || 0;
+          let sum = num1 + num2 + flag;
+          // 判断是否有进位
+          if (sum >= 10) {
+            sum = sum % 10;
+            flag = 1;
+          } else {
+            flag = 0;
+          }
+          result.push(sum);
+          // 最后仍然有进位,需要添加进去
+          if (i === length - 1 && flag) {
+            result.push(flag);
+          }
+        }
+        return result.reverse().join("");
+      }
+      console.log(bigNumSum(a, b));
+    </script>
+  </body>
+</html>

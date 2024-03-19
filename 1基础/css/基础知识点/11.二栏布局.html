@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 方法一 */
+        /* .left {
+            width: 100px;
+            height: 300px;
+            background: red;
+            float: left;
+        }
+
+        .right {
+            height: 300px;
+            background: blue;
+            overflow: hidden;
+        } */
+        /* 方法二 */
+        /* .left {
+            width: 100px;
+            height: 300px;
+            background: red;
+            float: left;
+        }
+
+        .right {
+            height: 300px;
+            background: blue;
+            overflow: hidden;
+        } */
+        /* 方法四 */
+        /* .outer {
+            display: flex;
+            height: 300px;
+        }
+
+        .left {
+            width: 150px;
+            background: tomato;
+        }
+
+        .right {
+            flex: 1;
+            background: gold;
+        } */
+        .outer{
+            height: 300px;
+            background-color: pink;
+            overflow: hidden;
+        }
+        .left{
+            width: 150px;
+            height: 300px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>

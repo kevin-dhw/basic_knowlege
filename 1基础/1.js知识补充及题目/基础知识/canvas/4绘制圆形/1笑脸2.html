@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="c1" width="600px" height="400px"></canvas>
+    <script>
+      // 1.找到画布
+      let c1 = document.getElementById("c1");
+      // 2.获取画笔，上下文对象
+      let ctx = c1.getContext("2d");
+      //         使用moveTo来移动点
+      //   头
+      ctx.beginPath();
+      ctx.arc(75, 75, 50, 0, Math.PI * 2);
+      // 移到嘴巴的起点
+      ctx.moveTo(115, 75);
+      //   嘴巴
+      ctx.arc(75, 75, 40, 0, Math.PI);
+      // 移动到左眼上
+      ctx.moveTo(70, 60);
+      //   左眼
+      ctx.arc(60, 60, 10, 0, Math.PI * 2);
+      // 移动到右眼上
+      ctx.moveTo(100, 60);
+      // 右眼
+      ctx.arc(90, 60, 10, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.closePath();
+    </script>
+  </body>
+</html>

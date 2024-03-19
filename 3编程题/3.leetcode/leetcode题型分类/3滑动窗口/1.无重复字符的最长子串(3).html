@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      滑动窗口思想  （双指针（两个变量，记录起始位置） ） ***
+      输入: s = "abcabcbb"
+     输出: 3 
+     解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+      */
+      let s = "abcabcbb";
+      function getLongStr(s) {
+        let l = 0;
+        let res = 0;
+        const map = new Map();
+        for (let r = 0; r < s.length; r++) {
+          // has表示存在  有存在字符就向左移动一位
+          /*
+          && 是处理第一位和最后一位字符重复的问题  
+          因为滑动窗口已经不是第一位了
+          */
+          if (map.has(s[r]) && map.get(s[r]) >= l) {
+            l = map.get(s[r]) + 1;
+          }
+          // r - l + 1 表示现窗口的长度
+          res = Math.max(res, r - l + 1);
+          // 每次把当前字符存在的设置进字典里面
+          map.set(s[r], r);
+        }
+        return res;
+      }
+      function getLongStr2(s) {
+        let r = 0,
+          l = 0,
+          res = 0;
+        const map = new Map();
+        while (r < s.length) {
+          let n = s[r];
+          if (map.has(n)) {
+            l = map.get(n) + 1;
+          }
+          res = Math.max(res, r - l + 1);
+          map.set(n, r);
+          r++;
+        }
+        return res;
+      }
+      console.log(getLongStr(s));
+    </script>
+  </body>
+</html>

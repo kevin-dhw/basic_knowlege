@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a=10;
+        // 全局变量和局部变量同名时，全局变量不会作用于局部变量的作用域
+        function test() {
+            console.log(a); // undefined
+            a=100
+            console.log(this.a); // 10
+            var a;
+            console.log(a); // 100
+        }
+        test()
+
+        var b=10;
+        function test2() {
+            console.log(b); // 10 去拿全局的
+            b=100 //这时候这里改变的是全局的变量  下面是100
+            console.log(this.b); // 100
+            console.log(b); // 100
+        }
+        test2()
+    </script>
+</body>
+</html>

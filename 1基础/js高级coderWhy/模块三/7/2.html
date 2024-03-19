@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 面试题 -->
+    <script>
+        // 面试题一
+        var n = 100
+        function foo() {
+            // 里面没有var 会往上级查找 把上级var 的 n 改成 200
+            n = 200
+        }
+        foo()
+        console.log(n); //200
+
+        //    面试题二   视频14分钟
+        var a = 200
+        function foo2() {
+            console.log(a);
+            var a = 300
+            console.log(a);
+        }
+        foo2()
+
+        // 面试题三  
+        var c = 100
+        function foo1() {
+            console.log(c);
+        }
+        function foo3() {
+            var c = 200
+            console.log(c);
+            foo1()
+        }
+        foo3()
+    </script>
+</body>
+
+</html>

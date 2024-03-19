@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   all方法
+      Promise.Myall = function (promiseList = []) {
+        return new MyPromise((resolve, reject) => {
+          // 所有的结果
+          const result = [];
+          const length = promiseList.length;
+          let resolvedCount = 0;
+          promiseList.forEach((p) => {
+            p.then((res) => {
+              result.push(res);
+              resolvedCount++;
+              // 遍历到了最后一个
+              if (resolvedCount === length) {
+                resolve(result);
+              }
+            }).catch((err) => {
+              reject(err);
+            });
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   race方法
+      Promise.MyRace = function (promiseList = []) {
+        let resolved = false;
+        return new MyPromise((resolve, reject) => {
+          promiseList.forEach((p) => {
+            p.then((res) => {
+              if (!resolved) {
+                resolve(res);
+                resolved = true;
+              }
+            }).catch((err) => {
+              reject(err);
+            });
+          });
+        });
+      };
+    </script>
+  </body>
+</html>

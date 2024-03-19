@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      https://juejin.cn/post/6844904077537574919#heading-40
+      坑点： 18行resolve  但是promise后面没有then所以不执行
+            不执行的内容是promise()这个整体 ， 下面async1 success及后面还是会执行
+      */
+      async function async1() {
+        console.log("async1 start");
+        await new Promise((resolve) => {
+          console.log("promise1");
+          resolve("promise resolve");
+        });
+        console.log("async1 success");
+        return "async1 end";
+      }
+      console.log("srcipt start");
+      async1().then((res) => {
+        console.log(res, "11");
+      });
+      new Promise((resolve) => {
+        console.log("promise2");
+        setTimeout(() => {
+          console.log("timer");
+        });
+      });
+
+      /*
+        打印
+        srcipt start
+        async1 start
+        promise1
+        promise2
+        async1 success
+        async1 end
+        timer
+        微  11 then
+        宏  16宏
+        */
+    </script>
+  </body>
+</html>

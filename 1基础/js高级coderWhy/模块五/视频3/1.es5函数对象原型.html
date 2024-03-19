@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {}
+        function foo() {}
+        // 函数也可以看做一个对象  也有__proto__(隐式原型) 
+        // 作用：查找key对应的value
+
+
+
+        // console.log(foo.__proto__);
+        // 函数的原型 prototype(显示原型)
+        // 作用：用来构造对象时，给对象设置隐式原型的
+        console.log(foo.prototype);
+    </script>
+</body>
+</html>
