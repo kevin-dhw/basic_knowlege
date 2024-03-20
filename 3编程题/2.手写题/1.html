@@ -7,15 +7,36 @@
   </head>
   <body>
     <script>
-      let arr = [1, 2, 3, 4];
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === 2) {
-          arr.splice(i, 1);
+      const tree = [
+        {
+          id: 1,
+          text: "节点1",
+          parentId: 0,
+          children: [
+            {
+              id: 2,
+              text: "节点1_1",
+              parentId: 1,
+            },
+          ],
+        },
+      ];
 
-          i--;
-        }
-        console.log(arr[i], "out");
+      function fn(data) {
+        const res = [];
+        const dfs = (tree) => {
+          tree.forEach((item) => {
+            if (item.children) {
+              dfs(item.children);
+              delete item.children;
+            }
+            res.push(item);
+          });
+        };
+        dfs(data);
+        return res;
       }
+      console.log(fn(tree), "12");
     </script>
   </body>
 </html>
