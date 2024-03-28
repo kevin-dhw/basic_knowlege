@@ -6,27 +6,28 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="ele">
+      <span>
+        <a></a>
+      </span>
+      <span>
+        <a></a>
+        <a></a>
+      </span>
+    </div>
     <script>
-      function fn() {
-        console.log(111);
-      }
-      function myInterval(fn, timeout) {
-        let timer = null;
-        function interval() {
-          fn();
-          timer = setTimeout(interval, timeout);
-        }
-        timer = setTimeout(interval, timeout);
-        return timer;
-      }
-      function mySettimeout(fn, timeout) {
-        let timer = setTimeout(() => {
-          fn();
-          clearTimeout(timer);
-        }, timeout);
-      }
       // 1233
-      mySettimeout(fn, 2000);
+      let domtree = document.querySelector("#ele");
+      function dom2Json(domtree) {
+        let obj = {};
+        obj.tag = domtree.tagName;
+        obj.children = [];
+        Array.from(domtree.children).forEach((child) => {
+          obj.children.push(dom2Json(child));
+        });
+        return obj;
+      }
+      console.log(dom2Json(domtree));
     </script>
   </body>
 </html>
