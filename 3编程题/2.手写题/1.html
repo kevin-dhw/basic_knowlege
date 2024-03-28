@@ -6,37 +6,28 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="ele">
+      <span>
+        <a></a>
+      </span>
+      <span>
+        <a></a>
+        <a></a>
+      </span>
+    </div>
     <script>
-      const tree = [
-        {
-          id: 1,
-          text: "节点111111 12 23",
-          parentId: 0,
-          children: [
-            {
-              id: 2,
-              text: "节点1_1",
-              parentId: 1,
-            },
-          ],
-        },
-      ];
-
-      function fn(data) {
-        const res = [];
-        const dfs = (tree) => {
-          tree.forEach((item) => {
-            if (item.children) {
-              dfs(item.children);
-              delete item.children;
-            }
-            res.push(item);
-          });
-        };
-        dfs(data);
-        return res;
+      // 1233
+      let domtree = document.querySelector("#ele");
+      function dom2Json(domtree) {
+        let obj = {};
+        obj.tag = domtree.tagName;
+        obj.children = [];
+        Array.from(domtree.children).forEach((child) => {
+          obj.children.push(dom2Json(child));
+        });
+        return obj;
       }
-      console.log(fn(tree), "1211111");
+      console.log(dom2Json(domtree));
     </script>
   </body>
 </html>
