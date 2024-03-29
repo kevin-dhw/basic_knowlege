@@ -6,28 +6,22 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="ele">
-      <span>
-        <a></a>
-      </span>
-      <span>
-        <a></a>
-        <a></a>
-      </span>
-    </div>
     <script>
-      // 1233
-      let domtree = document.querySelector("#ele");
-      function dom2Json(domtree) {
-        let obj = {};
-        obj.tag = domtree.tagName;
-        obj.children = [];
-        Array.from(domtree.children).forEach((child) => {
-          obj.children.push(dom2Json(child));
+      Promise.MyRace = function (promiseList = []) {
+        let flag = true;
+        return new Promise((resolve, reject) => {
+          promiseList.forEach((p) => {
+            p.then((res) => {
+              if (flag) {
+                resolve(res);
+                flag = false;
+              }
+            }).catch((err) => {
+              reject(err);
+            });
+          });
         });
-        return obj;
-      }
-      console.log(dom2Json(domtree));
+      };
     </script>
   </body>
 </html>
