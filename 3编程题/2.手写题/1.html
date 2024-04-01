@@ -7,19 +7,26 @@
   </head>
   <body>
     <script>
-      Promise.MyRace = function (promiseList = []) {
-        let flag = true;
+      Promise.AllSettled = function (promiseList = []) {
         return new Promise((resolve, reject) => {
-          promiseList.forEach((p) => {
-            p.then((res) => {
-              if (flag) {
-                resolve(res);
-                flag = false;
-              }
+          const res = [];
+          let count = 0;
+          let len = promiseList.length;
+          const setData = (index, data) => {
+            res[index] = data;
+            count++;
+            if (len === count) {
+              resolve(res);
+            }
+          };
+          for (let i = 0; i < len; i++) {
+            let n = promiseList[i];
+            n.then((res) => {
+              setData(i, { status: "resolved", data: res });
             }).catch((err) => {
-              reject(err);
+              setData(i, { status: "rejected", data: err });
             });
-          });
+          }
         });
       };
       // 123
