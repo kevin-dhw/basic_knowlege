@@ -7,29 +7,27 @@
   </head>
   <body>
     <script>
-      Promise.AllSettled = function (promiseList = []) {
-        return new Promise((resolve, reject) => {
-          const res = [];
-          let count = 0;
-          let len = promiseList.length;
-          const setData = (index, data) => {
-            res[index] = data;
-            count++;
-            if (len === count) {
-              resolve(res);
-            }
-          };
-          for (let i = 0; i < len; i++) {
-            let n = promiseList[i];
-            n.then((res) => {
-              setData(i, { status: "resolved", data: res });
-            }).catch((err) => {
-              setData(i, { status: "rejected", data: err });
-            });
-          }
+      function wrap(pro) {
+        let obj = {};
+        let p1 = new Promise((resolve, reject) => {
+          obj.resolve = resolve;
+          obj.reject = reject;
         });
-      };
-      // 123
+        obj.promise = Promise.race([pro, p1]);
+        return obj;
+      }
+      let testPro = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("成功");
+        }, 2000);
+      });
+      let wrapPro = wrap(testPro);
+      setTimeout(() => {
+        wrapPro.resolve("超过3000 拦截了");
+      }, 3000);
+      wrapPro.promise.then((res) => {
+        console.log(res);
+      });
     </script>
   </body>
 </html>
