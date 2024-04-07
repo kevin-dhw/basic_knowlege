@@ -22,6 +22,7 @@
         let last = arr.length - 1;
         const cur = arr[arr.length - 1];
         console.log(cur, "cur");
+        //                              这里等于时   cur就是最后一项 不用又一次拿到最后一项
         const left = arr.filter((v, i) => v <= cur && i !== arr.length - 1);
         const right = arr.filter((v) => v > cur);
         return [...quickSort(left), cur, ...quickSort(right)];
