@@ -7,31 +7,33 @@
   </head>
   <body>
     <script>
-      let arr = [
-        ["1", "2"],
-        ["3", "4"],
-        ["5", "6"],
-      ];
-      function fn(arr) {
-        let res = [];
-        let path = [];
-        let k = arr.length;
-        function backtrack(start) {
-          if (path.length === k) {
-            res.push([...path]);
-            return;
-          }
-          for (let i = 0; i < arr[start].length; i++) {
-            let n = arr[start][i];
-            path.push(n);
-            backtrack(start + 1);
-            path.pop();
-          }
-        }
-        backtrack(0);
-        return res;
+      var a = 100;
+      function fn() {
+        console.log(a);
+        var a = 200;
+        console.log(a);
       }
-      console.log(fn(arr), "123");
+
+      fn();
+      console.log(a);
+
+      var a;
+      console.log(a);
+      var a = 300;
+      console.log(a);
+
+      /*
+      打印
+      undefiend
+      200
+      100
+      undefiend
+      300
+      
+      
+
+
+      */
     </script>
   </body>
 </html>
