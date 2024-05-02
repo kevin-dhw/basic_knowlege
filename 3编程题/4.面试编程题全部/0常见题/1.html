@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      找出一段字符串里面连续重复最多的字符
+      并返回他位置  相同则返回第一个
+      */
+      const str = "abbbccbbb"; // 1
+      function getMostLetter2(str) {
+        let l = 0;
+        let r = 0;
+        let map = new Map();
+        let arr = [];
+        let i = 0;
+        while (r < str.length) {
+          let n = str[r];
+          if (map.has(n)) {
+            map.set(n, map.get(n) + 1);
+          } else {
+            map.set(n, 1);
+          }
+          if (n != str[r + 1]) {
+            const keys = [...map.keys()];
+            const lastKey = keys[keys.length - 1];
+            arr[i] = {
+              key: lastKey,
+              value: map.get(lastKey),
+              position: r - map.get(lastKey) + 1,
+            };
+            i++;
+            map = new Map();
+          }
+          r++;
+        }
+        let max = 0;
+        for (let i = 0; i < arr.length; i++) {
+          max = Math.max(max, arr[i].value);
+        }
+        return arr.find((item) => item.value === max);
+      }
+      console.log(getMostLetter2(str), "1");
+    </script>
+  </body>
+</html>

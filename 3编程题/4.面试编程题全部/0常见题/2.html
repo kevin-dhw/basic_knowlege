@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        a: 1,
+        b: [1, 2, { a: true, b: [3] }],
+        g: null,
+      };
+      function isObj(val) {
+        return typeof val === "object" && val !== null;
+      }
+      function fn(obj) {
+        let res = {};
+        const dfs = (obj, fix) => {
+          if (isObj(obj)) {
+            if (Array.isArray(obj)) {
+              obj.forEach((item, index) => {
+                dfs(item, `${fix}[${index}]`);
+              });
+            } else {
+              for (let k in obj) {
+                if (obj[k]) {
+                  dfs(obj[k], `${fix}${fix ? "." : ""}${k}`);
+                }
+              }
+            }
+          } else {
+            res[fix] = obj;
+          }
+        };
+        dfs(obj, "");
+        return res;
+      }
+      console.log(fn(obj));
+    </script>
+  </body>
+</html>
