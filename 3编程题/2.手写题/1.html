@@ -7,24 +7,20 @@
   </head>
   <body>
     <script>
-      let arr = [1, 2, 3, 4, 5, 6, 7];
-      function search(arr, target) {
-        let low = 0;
-        let high = arr.length - 1;
-        while (low <= high) {
-          let mid = Math.floor((low + high) / 2);
-          let cur = arr[mid];
-          if (cur < target) {
-            low = mid + 1;
-          } else if (cur > target) {
-            high = mid - 1;
-          } else if (cur === target) {
-            return mid;
+      function myInstance(left, right) {
+        left = left.__proto__;
+        right = right.prototype;
+        while (true) {
+          if (left === right) {
+            return true;
           }
+          if (left === null) {
+            return false;
+          }
+          left = left.__proto__;
         }
-        return -1;
       }
-      console.log(search(arr, 2));
+      console.log(myInstance([], Function));
     </script>
   </body>
 </html>
