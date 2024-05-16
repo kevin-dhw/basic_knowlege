@@ -7,20 +7,19 @@
   </head>
   <body>
     <script>
-      function myInstance(left, right) {
-        left = left.__proto__;
-        right = right.prototype;
-        while (true) {
-          if (left === right) {
-            return true;
+      let str = "helloworld";
+      function fn(str) {
+        let obj = {};
+        for (let v of str) {
+          if (obj[v]) {
+            obj[v] = obj[v] + 1;
+          } else {
+            obj[v] = 1;
           }
-          if (left === null) {
-            return false;
-          }
-          left = left.__proto__;
         }
+        return obj;
       }
-      console.log(myInstance([], Function));
+      console.log(fn(str));
     </script>
   </body>
 </html>
