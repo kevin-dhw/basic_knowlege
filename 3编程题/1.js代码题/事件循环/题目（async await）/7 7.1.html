@@ -7,7 +7,10 @@
   </head>
   <body>
     <script>
-      /*难*/
+      /*难   后面回来复习
+       resolve(6)和 resolve(1) 同样都是p的resolve
+       只会先执行先执行的一个
+      */
       const first = () =>
         new Promise((resolve, reject) => {
           console.log(3);
@@ -22,7 +25,7 @@
           });
           resolve(2);
           p.then((arg) => {
-            console.log(arg);
+            console.log(arg, "123");
           });
         });
       first().then((arg) => {

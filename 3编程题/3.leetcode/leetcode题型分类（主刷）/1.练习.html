@@ -8,32 +8,23 @@
   </head>
   <body>
     <script>
-      let nums = [1, 2, 2];
-      function fn(nums) {
-        let result = [];
-        let path = [];
-        let len = nums.length;
-        let used = new Array(len).fill(false);
-        function backTrace() {
-          if (path.length === len) {
-            result.push([...path]);
-            return;
-          }
-          for (let i = 0; i < len; i++) {
-            if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) continue;
-            if (!used[i]) {
-              path.push(nums[i]);
-              used[i] = true;
-              backTrace();
-              path.pop();
-              used[i] = false;
-            }
+      let heights = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+      function fn(heights) {
+        let l = 0,
+          r = heights.length,
+          maxArea = 0;
+        while (r > l) {
+          let temp = (r - l) * Math.min(heights[l], heights[r]);
+          if (temp > maxArea) maxArea = temp;
+          if (heights[r] > heights[l]) {
+            l++;
+          } else {
+            r--;
           }
         }
-        backTrace();
-        return result;
+        return maxArea;
       }
-      console.log(fn(nums));
+      console.log(fn(heights));
     </script>
   </body>
 </html>
