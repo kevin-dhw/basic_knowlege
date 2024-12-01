@@ -16,18 +16,24 @@
     */
     // 按相同数字分成数组，求它们长度平均值
     // 111 2222 33 44    (3+4+2+2)/4
-    let nums = [7, 1, 5, 3, 6, 4]
+    let nums = [2, 3, 1, 1, 4]
     function fn(nums) {
-      let res = -Infinity
-      let sum = 0
-      for (let i = 0; i < nums.length; i++) {
-        sum += nums[i]
-        res = Math.max(res, sum)
-        if (sum < 0) sum = 0
+      let cover = nums[0]
+      for (let i = 0; i < cover; i++) {
+        cover = Math.max(cover, i + nums[i])
+        if (cover >= nums.length - 1) {
+          return true
+        }
       }
-      return res
+      return false
     }
     console.log(fn(nums), '111');
+    function fun(nums) {
+      let max = 0
+      for (let i = 0; i < nums.length; i++) {
+
+      }
+    }
 
 
   </script>
