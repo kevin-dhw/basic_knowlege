@@ -12,6 +12,17 @@
       并返回他位置  相同则返回第一个
       */
       const str = "abbbccbbb"; // 1
+      function getMostLetter(str) {
+        let l=0;
+        let res =0;
+        for (let r=0; r<str.length; r++) {
+           if (str[r] !== str[l]) {
+              l = r
+           }
+           res = Math.max(res, r-l+1)
+        }
+        return res
+      }
       function getMostLetter2(str) {
         let l = 0;
         let r = 0;
