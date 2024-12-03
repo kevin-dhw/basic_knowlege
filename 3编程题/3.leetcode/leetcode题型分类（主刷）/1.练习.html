@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style></style>
-</head>
-
-<body>
-  <script>
-    /*
-    找出一段字符串里面连续重复最多的字符
-    并返回他位置  相同则返回第一个
-    */
-    // 按相同数字分成数组，求它们长度平均值
-    // 111 2222 33 44    (3+4+2+2)/4
-    let nums = [2, 3, 1, 1, 4]
-    function fn(nums) {
-      let cover = nums[0]
-      for (let i = 0; i < cover; i++) {
-        cover = Math.max(cover, i + nums[i])
-        if (cover >= nums.length - 1) {
-          return true
+  <body>
+    <script>
+      /*
+      找出一段字符串里面连续重复最多的字符
+      并返回他位置  相同则返回第一个
+      */
+      // 按相同数字分成数组，求它们长度平均值
+      // 111 2222 33 44    (3+4+2+2)/4
+      let digits = "23";
+      function fn(digits) {
+        const k = digits.length;
+        const map = [
+          "",
+          "",
+          "abc",
+          "def",
+          "ghi",
+          "jkl",
+          "mno",
+          "pqrs",
+          "tuv",
+          "wxyz",
+        ];
+        if (!k) return [];
+        if (k === 1) return map[digits].split("");
+        let res = [];
+        let path = [];
+        function dfs(start) {
+          if (path.length === k) {
+            res.push(path.join(""));
+            return;
+          }
+          for (let n of map[digits[start]]) {
+            path.push(n);
+            dfs(start + 1);
+            path.pop();
+          }
         }
+        dfs(0);
+        return res;
       }
-      return false
-    }
-    console.log(fn(nums), '111');
-    function fun(nums) {
-      let max = 0
-      for (let i = 0; i < nums.length; i++) {
-
-      }
-    }
-
-
-  </script>
-</body>
-
+      console.log(fn(digits), "23341111");
+    </script>
+  </body>
 </html>
