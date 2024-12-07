@@ -1,58 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style></style>
-  </head>
-  <div id="box"></div>
-  <body>
-    <script>
-      const bt = {
-        val: 1,
-        left: {
-          val: 2,
-          left: {
-            val: 4,
-            left: null,
-            right: null,
-          },
-          right: {
-            val: 5,
-            left: null,
-            right: null,
-          },
-        },
-        right: {
-          val: 3,
-          left: {
-            val: 6,
-            left: null,
-            right: null,
-          },
-          right: {
-            val: 7,
-            left: null,
-            right: null,
-          },
-        },
-      };
-      const fn = (root) => {
-        if (!root) return;
-        const stack = [];
-        let p = root;
-        while (stack.length || p) {
-          while (p) {
-            stack.push(p);
-            p = p.left;
-          }
-          const n = stack.pop();
-          console.log(n.val);
-          p = n.right;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style></style>
+</head>
+<div id="box"></div>
+
+<body>
+  <script>
+    let nums = [1, 2, 2]
+    function fn(nums) {
+      let result = []
+      let path = []
+      let used = new Array(nums.length).fill(false)
+      function backTrack() {
+        if (path.length === nums.length) {
+          result.push([...path])
+          return
         }
-      };
-      fn(bt);
-    </script>
-  </body>
+        for (let i = 0; i < nums.length; i++) {
+          if (used[i]) continue
+          if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) continue
+          used[i] = true;
+          path.push(nums[i]);
+          backTrack();
+          path.pop();
+          used[i] = false;
+        }
+      }
+      backTrack()
+      return result
+    }
+    console.log(fn(nums), 'nums');
+
+  </script>
+</body>
+
 </html>
