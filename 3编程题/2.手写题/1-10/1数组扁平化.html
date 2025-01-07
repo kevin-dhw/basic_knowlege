@@ -18,12 +18,21 @@
           []
         );
       }
+      function fn(nums) {
+        return nums.reduce((pre, cur) => {
+          if (Array.isArray(cur)) {
+            return [...fn(cur), ...pre];
+          } else {
+            return [cur, ...pre];
+          }
+        }, []);
+      }
       function flat(arr) {
         return arr.reduce((pre, cur) => {
           return Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur];
         }, []);
       }
-      console.log(flat(nums), '12');
+      console.log(flat(nums), "12");
     </script>
   </body>
 </html>
