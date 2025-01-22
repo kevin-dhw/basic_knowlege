@@ -9,6 +9,7 @@
     <script>
       // 最多自动请求3次，任意一次成功就直接返回
       //num大于多少的时候  请求成功 否则失败
+      // 这里代码没效果
       function fetchWithRetry(num, maxRetry = 3) {
         return new Promise((resolve, reject) => {
           const dofetch = (attempt) => {

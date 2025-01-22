@@ -56,6 +56,7 @@
         context[fn] = this;
         let _this = this;
         const result = function (...innerArags) {
+          // 被当作构造函数，不需要改变this
           if (this instanceof _this === true) {
             this[fn] = _this;
             this[fn](...args.concat(innerArags));
@@ -63,6 +64,7 @@
             context[fn](...args.concat(innerArags));
           }
         };
+        // 如果绑定的是构造函数 那么需要继承构造函数原型属性和方法
         result.prototype = Object.create(this.prototype);
         return result;
       };
