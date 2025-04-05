@@ -40,6 +40,22 @@
       return result
     }
     console.log(fn(nums), 'fn111111');
+    /*
+      so here we gonna implement the function flat, as we all know, it usually used to hanlde the nested array.
+    like this array, it has mutiple element, which are also an arrays.
+      let's start by difine a flatten, which is a function. and it gonna recieve an array.
+    because we should get a new array. so we define result. and then we also need define function called dfs.
+    because we need handle the nested array. and now we will use for of to loop over each item.
+    using the array dot is array to check if the current item is an array or not. 
+      if so, we should use recursion, just like call the dfs with the current element. and if not,
+    we just need use push methods to push the element into the result.
+      obviously we should check if this flat is right. so we should call the function with an array.
+    and logging it to consloe. in this way, we can check the output. 
+      actually it's just a way to implement the flat. there are so many ways to implement it. but here i just tell 
+    you this way for it. bascially i will there are several people who can figure out what better way to
+    solve this problem.
+    
+    */
 
   </script>
 </body>
