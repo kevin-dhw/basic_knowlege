@@ -37,7 +37,22 @@
     var newFn = composeFn(double, pow);
     console.log(newFn(10));
 
-    // 印度口音的组合函数
+    /*
+      today let's implement the compose function, the first thing we should do is define composeFN, which is 
+    a function. and this composeFn gonna recieve mutiple function with spread opeator. 
+    to make sure that all the argument what we accept are function. we shopuld use for of to
+    loop over the functions. and then use typeof to type on each cahractor. if it doesn't equal to
+    function. we should throw an error. and block the statement.
+      if not, we should continue to impelement the compose function. because at first we should
+    pass some function in. and then pass some other varible that we should handle. so we should return
+    annoymous function which gonna revieve some data with spread variable. 
+      and inside this return funtion, firstly we should invoke the fisrt funtion, and get the result,
+    so we can do like define result to hold the return value of the first function. and then we should loop over
+    the functions. but what we should notice is we should start at index one. bexause we have call the first 
+    function. when we get the current function, we should call the function with the result. and we should
+    set the result equal the return value of each function. and eventually. we should return the result.
+    so that we log the output to the console, then check it.
+    */
   </script>
 </body>
 
