@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 每个2秒输出一次，输出3次
+      function createRepeat(times, interval) {
+        let count = 0;
+        return (param) => {
+          const timer = setInterval(() => {
+            console.log(param);
+            count++;
+            if (count >= times) {
+              clearInterval(timer);
+            }
+          }, interval * 1000);
+        };
+      }
+      const fn = createRepeat(3, 2);
+      fn("hello world");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.在内存中创建一个新对象
+    // 2.这个新对象内部的[[prototype]]特性被赋值为构造函数的prototype属性
+    // 3.构造函数内部的this被赋值为这个新对象(即this指向新对象)
+    // 4.执行构造函数内部的代码(给新对象添加属性)
+
+    // 5.如果构造函数返回非空 对象，则返回该对象；否则，返回刚创建的新对象。
+
+    // Object.create()可以帮我们生成一个对象，通过传参，可以将生成的对象的原型指向第一个参数
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    function myNew(fn, ...args) {
+      let newObj = Object.create(fn.prototype);
+      let res = fn.call(newObj, ...args);
+      if (res && (typeof res === "object" || typeof res === "function")) {
+        return res;
+      }
+      return newObj;
+    }
+    let p1 = myNew(Person, "小红", "20")
+
+    /*
+      so now we should implement the new operator. at first you should know the usage
+    of the new operator. so that you can understand the process of how to impelment new operaotr.
+      so let's get start. for the new operator, it first will create new object. and set the prototype of the 
+    new object to point to the function's prototype. and then we should use call method to invoke the function 
+    with the new object and arguemnt. so the this will point to this new object. becuase the function will return
+    return value. so we should check the return value if it exist. and typeof on the return value. if it equal to
+    object or function. then we should return the return value.
+      if not, we should return the new object.
+    
+    */
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 最多自动请求3次，任意一次成功就直接返回
+      //num大于多少的时候  请求成功 否则失败
+      function fetchWithRetry(num, maxRetry = 3) {
+        return new Promise((resolve, reject) => {
+          const dofetch = (attempt) => {
+            try {
+              if (num > 10) {
+                resolve("成功了");
+              } else {
+                console.log(111);
+              }
+            } catch (err) {
+              num++;
+              if (attempt < maxRetry) {
+                console.log(`${attempt + 1} failed, retry...`);
+                dofetch(attempt + 1);
+              } else {
+                reject("失败了");
+              }
+            }
+          };
+          dofetch(0);
+        });
+      }
+      fetchWithRetry(0, 3)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

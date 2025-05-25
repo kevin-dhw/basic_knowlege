@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // WeakMap 为了避免循环引用
+      function cloneDeep(obj, map = new WeakMap()) {
+        if (typeof obj !== "object" || obj === null) return obj;
+        let target;
+        // 避免循环引用  7: 00分钟
+        const objFormMap = map.get(obj);
+        // 有值就返回
+        if (objFormMap) return objFormMap;
+        // 没值就设置
+        map.set(obj, target);
+
+        // 处理map数据类型
+        if (obj instanceof Map) {
+          target = new Map();
+          obj.forEach((v, k) => {
+            // v可能是对象数组形式
+            const v1 = cloneDeep(v, map);
+            const k1 = cloneDeep(k, map);
+            target.set(k1, v1);
+          });
+        }
+        // 处理set
+        if (obj instanceof Set) {
+          target = new Set();
+          obj.forEach((v) => {
+            const v1 = cloneDeep(v, map);
+            target.add(v1);
+          });
+        }
+        // 处理数组
+        if (obj instanceof Array) {
+          target = obj.map((item) => cloneDeep(item, map));
+        }
+        // 处理对象
+        if (obj instanceof Object) {
+          for (const key in obj) {
+            const val = obj[key];
+            const val1 = cloneDeep(val, map);
+            target[key] = val1;
+          }
+        }
+        return target;
+      }
+    </script>
+  </body>
+</html>

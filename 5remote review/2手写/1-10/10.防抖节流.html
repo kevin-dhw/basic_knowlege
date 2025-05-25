@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function fn() {
+        console.log(111);
+      }
+      // 函数防抖
+      // 有定时器清除， 没有再用定时器去执行
+      function debounce(fn, delay) {
+        let timer = null;
+        return function () {
+          const content = this;
+          const args = arguments;
+          if (timer) {
+            clearTimeout(timer);
+          }
+          timer = setTimeout(() => {
+            fn.apply(content, args);
+          }, delay);
+        };
+      }
+      // 节流
+      // 有定时器返回， 没有在执行，然后在用定时器清空
+      function throttle(func, wait) {
+        let timer;
+        return function () {
+          const content = this;
+          const args = arguments;
+          if (timer) return;
+          func.apply(content, args);
+          timer = setTimeout(() => {
+            timer = null;
+          }, wait);
+        };
+      }
+      window.addEventListener("resize", throttle(fn, 2000));
+    </script>
+  </body>
+</html>
