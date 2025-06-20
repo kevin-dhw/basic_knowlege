@@ -9,22 +9,21 @@
 
 <body>
     <script>
-        let nums = [1, 2, [1, [2, 3, [4, 5, [6]]]]];
-        function flat(arr) {
-            let res = []
-            const dfs = (arr) => {
-                for (let n of arr) {
-                    if (Array.isArray(n)) {
-                        dfs(n)
-                    } else {
-                        res.push(n)
-                    }
+        let nums = [1, 3, -1, 10]
+        function fn(arr) {
+            let min = Infinity
+            let max = -Infinity
+            for (let n of arr) {
+                if (min > n) {
+                    min = n
+                }
+                if (max < n) {
+                    max = n
                 }
             }
-            dfs(arr)
-            return res
+            return max - min
         }
-        console.log(flat(nums), '11');
+        console.log(fn(nums), 'fn(nums)');
 
     </script>
 </body>
