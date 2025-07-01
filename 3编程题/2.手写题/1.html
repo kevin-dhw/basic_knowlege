@@ -13,32 +13,6 @@
     let a = "2344545665664566566";
     let b = "2344545665664566566";
 
-    function bigNumSum(str1, str2) {
-      const arr1 = str1.split("").reverse()
-      const arr2 = str2.split("").reverse()
-      const length = Math.max(arr1.length, arr2.length)
-      const result = []
-      let flag = 0
-      console.log(length, 'length');
-
-      for (let i = 0; i < length; i++) {
-        const num1 = Number(arr1[i]) || 0
-        const num2 = Number(arr2[i]) || 0
-        let sum = num1 + num2 + flag
-        if (sum >= 10) {
-          sum = sum % 10
-          flag = 1
-        } else {
-          flag = 0
-        }
-        result.push(sum)
-        if (i === length - 1 && flag) {
-          result.push(flag)
-        }
-      }
-      return result.reverse().join("")
-    }
-    console.log(bigNumSum(a, b));
 
 
   </script>
