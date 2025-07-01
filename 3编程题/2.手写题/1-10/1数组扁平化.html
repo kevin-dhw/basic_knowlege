@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <script>
-      let nums = [1, 2, [1, [2, 3, [4, 5, [6]]]]];
-      function flatter(arr) {
-        if (!arr.length) return;
-        return arr.reduce(
-          (pre, cur) =>
-            Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur],
-          []
-        );
-      }
-      function fn(nums) {
-        return nums.reduce((pre, cur) => {
-          if (Array.isArray(cur)) {
-            return [...fn(cur), ...pre];
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let nums = [1, 2, [1, [2, 3, [4, 5, [6]]]]];
+    function flatter(arr) {
+      if (!arr.length) return;
+      return arr.reduce(
+        (pre, cur) =>
+          Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur],
+        []
+      );
+    }
+    function fn(nums) {
+      return nums.reduce((pre, cur) => {
+        if (Array.isArray(cur)) {
+          return [...fn(cur), ...pre];
+        } else {
+          return [cur, ...pre];
+        }
+      }, []);
+    }
+    function flat(arr) {
+      return arr.reduce((pre, cur) => {
+        return Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur];
+      }, []);
+    }
+    function fn(nums) {
+      let res = []
+      const dfs = (nums) => {
+        for (let n of nums) {
+          if (Array.isArray(n)) {
+            dfs(n)
           } else {
-            return [cur, ...pre];
+            res.push(n)
           }
-        }, []);
+        }
       }
-      function flat(arr) {
-        return arr.reduce((pre, cur) => {
-          return Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur];
-        }, []);
-      }
-      console.log(flat(nums), "12");
-    </script>
-  </body>
+      dfs(nums)
+      return res
+    }
+    console.log(flat(nums), "12");
+    /*
+      let's look at this problem, it's like impelement the flattan, there is an array, and inside of this 
+    array, it has so many subset, one, two, and another smaller array. and how can we solve this problem.
+      so the first thing we should do is define flatten, which gonna receive an array. and then we should 
+    define res, which is an empty array. we will use it to hold the result. we also should define dfs to 
+    handle the array, because we should use recursion to solve this problem. and then we use for of loop,
+      the thing we should do is using Array dot is Array to check if the current item is array, if so, we should 
+    use recursion. if not we should put the current item into the array res. and finaly we should call dfs 
+    with the array that we pass in to the function fn. don't forget return the res. because this is what we 
+    wanna get. and you can log the result to the console, because it's the easiest way to check the output.
+    
+    */
+  </script>
+</body>
+
 </html>
