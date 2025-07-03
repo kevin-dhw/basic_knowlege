@@ -9,21 +9,29 @@
 
 <body>
   <script>
-    function foo(x, y, z) {
-      console.log(x + y + z);
+    var num = 200;
+    function double(num) {
+      return num * 2;
     }
-    function curryFn(fn) {
-      return function curring(...args) {
-        if (args.length >= fn.length) {
-          fn(...args)
-        } else {
-          return (...innerArgs) => {
-            return curring(...args.concat(innerArgs))
-          }
+    function pow(num) {
+      return num ** 2;
+    }
+    function composition(...fns) {
+      for (let fn of fns) {
+        if (typeof fn !== 'function') {
+          throw error('fu must be function')
         }
       }
+      return (...args) => {
+        let result = fns[0].call(this, ...args)
+        for (let i = 1; i < fns.length; i++) {
+          result = fns[i].call(this, result)
+        }
+        return result
+      }
     }
-    // let fn = curryFn(foo)
+    let fn = composition(double, pow)
+    console.log(fn(2));
   </script>
 </body>
 

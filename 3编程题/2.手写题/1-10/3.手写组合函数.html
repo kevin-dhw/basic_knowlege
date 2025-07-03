@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <script>
-      // 组合函数的概念  一个函数处理不了  连续调用两个函数
-      var num = 200;
-      function double(num) {
-        return num * 2;
-      }
-      function pow(num) {
-        return num ** 2;
-      }
-      function composeFn(...fns) {
-        if (fns.length <= 0) return;
-        for (var fn of fns) {
-          if (typeof fn !== "function") {
-            throw new Error("fn must be function");
-          }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 组合函数的概念  一个函数处理不了  连续调用两个函数
+    var num = 200;
+    function double(num) {
+      return num * 2;
+    }
+    function pow(num) {
+      return num ** 2;
+    }
+    function composeFn(...fns) {
+      if (fns.length <= 0) return;
+      for (var fn of fns) {
+        if (typeof fn !== "function") {
+          throw new Error("fn must be function");
         }
-
-        return function (...args) {
-          var result = fns[0].apply(this, args);
-          for (var i = 1; i < fns.length; i++) {
-            var fn = fns[i];
-            result = fn.apply(this, [result]);
-          }
-          return result;
-        };
       }
-      var newFn = composeFn(double, pow);
-      console.log(newFn(10));
-    </script>
-  </body>
+
+      return function (...args) {
+        var result = fns[0].apply(this, args);
+        for (var i = 1; i < fns.length; i++) {
+          var fn = fns[i];
+          result = fn.apply(this, [result]);
+        }
+        return result;
+      };
+    }
+    var newFn = composeFn(double, pow);
+    console.log(newFn(10));
+    /*
+      today let's think about how to implement the composition, what's that meaning. it means 
+    you can use several function to hanle one thing. there is a varaible num, and there are two 
+    function, which are double and pow. 
+      what we should do next is define composeFn, which gonna accept arguments whith the spread oparetor
+    and then we should use for of loop to loop/itaretor over/travesal each item. then use if statement
+    to check if current item is function, if one of the items is not function, we should return it 
+      then we should return an anonymous function, first we should call the first function, and let result
+    to hold the return value, and then loop over other function, call each function with the result.
+    and finaly return the result.
+    
+    */
+  </script>
+</body>
+
 </html>
