@@ -9,31 +9,19 @@
 
 <body>
   <script>
-    function fn(name) {
-      console.log(this.name, ...arguments, "33");
-      console.log(this);
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
     }
-    let obj = {
-      name: "jack",
-    };
-    Function.prototype.myCall = function (context, ...args) {
-      if (!context) {
-        context = window
+    function myNew(fn, ...args) {
+      let newObj = Object.create(fn.prototype)
+      let result = fn.call(newObj, ...args)
+      if (result && (typeof result === 'object' || typeof result === 'function')) {
+        return result
       }
-      let fn = Symbol()
-      context[fn] = this
-      let _this = this
-      const result = function (...innerArgs) {
-        if (this instanceof _this) {
-          this[fn] = _this
-          this[fn](...args.concat(innerArgs))
-        } else {
-          context[fn](...args.concat(innerArgs))
-        }
-      }
-      result.prototype = Object.create(this.prototype)
-      return result
+      return newObj
     }
+
   </script>
 </body>
 
