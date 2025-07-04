@@ -9,29 +9,31 @@
 
 <body>
   <script>
-    var num = 200;
-    function double(num) {
-      return num * 2;
+    function fn(name) {
+      console.log(this.name, ...arguments, "33");
+      console.log(this);
     }
-    function pow(num) {
-      return num ** 2;
-    }
-    function composition(...fns) {
-      for (let fn of fns) {
-        if (typeof fn !== 'function') {
-          throw error('fu must be function')
+    let obj = {
+      name: "jack",
+    };
+    Function.prototype.myCall = function (context, ...args) {
+      if (!context) {
+        context = window
+      }
+      let fn = Symbol()
+      context[fn] = this
+      let _this = this
+      const result = function (...innerArgs) {
+        if (this instanceof _this) {
+          this[fn] = _this
+          this[fn](...args.concat(innerArgs))
+        } else {
+          context[fn](...args.concat(innerArgs))
         }
       }
-      return (...args) => {
-        let result = fns[0].call(this, ...args)
-        for (let i = 1; i < fns.length; i++) {
-          result = fns[i].call(this, result)
-        }
-        return result
-      }
+      result.prototype = Object.create(this.prototype)
+      return result
     }
-    let fn = composition(double, pow)
-    console.log(fn(2));
   </script>
 </body>
 
