@@ -1,47 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <script>
-      function fn() {
-        console.log(111);
-      } 
-      // 函数防抖
-      // 有定时器清除， 没有再用定时器去执行
-      function debounce(fn, delay) {
-        let timer = null;
-        return function () {
-          const content = this;
-          const args = arguments;
-          if (timer) {
-            clearTimeout(timer);
-          }
-          timer = setTimeout(() => {
-            fn.apply(content, args);
-          }, delay);
-        };
-      }
-      // 节流
-      // 有定时器返回， 没有在执行，然后在用定时器清空
-      function throttle(func, wait) {
-        let timer;
-        return function () {
-          const content = this;
-          const args = arguments;
-          if (timer) return;
-          func.apply(content, args);
-          timer = setTimeout(() => {
-            timer = null;
-          }, wait);
-        };
-      }
-      window.addEventListener("resize", throttle(fn, 2000));
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fn() {
+      console.log(111);
+    }
+    // 函数防抖
+    // 有定时器清除， 没有再用定时器去执行
+    function debounce(fn, delay) {
+      let timer = null;
+      return function () {
+        const content = this;
+        const args = arguments;
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          fn.apply(content, args);
+        }, delay);
+      };
+    }
+    // 节流
+    // 有定时器返回， 没有在执行，然后在用定时器清空
+    function throttle(func, wait) {
+      let timer;
+      return function () {
+        const content = this;
+        const args = arguments;
+        if (timer) return;
+        func.apply(content, args);
+        timer = setTimeout(() => {
+          timer = null;
+        }, wait);
+      };
+    }
+    /*
+      now let's talk about how to implement the debounce function, before we solve it.
+    we should know the concept, what's the debounce. if we click the button, and it will trigger
+    a function. but when click too fast. it will response two times, even more.
+    at this point, we should ignore the more clicks. just like let the first click happen.
+      this is debounce. so let's get started. first we define debounce, which gonna accept
+    a function and delay. inside of the debounce, we define timer, we don't need assign anything
+    to it right now. and then we should return an anonymous function, and it will recieve arguments 
+    with the spread operator. and then we should check if the timer is equal to null, if so,
+      we can use the clearTimeout to clear it. and if not, we should set timer equal to setTimeout,
+    and it will accept a function, and a delay, inside of this anonymous function, we can call fn with the args
+    */
+    window.addEventListener("resize", throttle(fn, 2000));
+  </script>
+</body>
+
 </html>

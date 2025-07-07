@@ -9,44 +9,21 @@
 
 <body>
   <script>
-    function fn() {
-      console.log(111);
-    }
-    function debounce(fn, delay) {
-      let timer = null
-      return function (...args) {
-        if (timer) {
-          clearTimeout(timer)
-        }
-        timer = setTimeout(() => {
-          fn.call(this, ...args)
+    function sleep(delay) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
         }, delay)
-      }
+      })
     }
-    function trottle(fn, delay) {
-      let timer = null
-      return function (...args) {
-        if (timer) return
-        fn.call(this, ...args)
-        timer = setTimeout(() => {
-          timer = null
-        }, delay)
-      }
+
+    async function fn() {
+      await sleep(2000)
+      console.log('fn12345');
     }
-    /*
-      now let's talk about how to implement the debounce function, before we solve it.
-    we should know the concept, what's the debounce. if we click the button, and it will trigger
-    a function. but when click too fast. it will response two times, even more.
-    at this point, we should ignore the more clicks. just like let the first click happen.
-      this is debounce. so let's get started. first we define debounce, which gonna accept
-    a function and delay. inside of the debounce, we define timer, we don't need assign anything
-    to it right now. and then we should return an anonymous function, and it will recieve arguments 
-    with the spread operator. and then we should check if the timer is equal to null, if so,
-      we can use the clearTimeout to clear it. and if not, we should set timer equal to setTimeout,
-    and it will accept a function, and a delay, inside of this anonymous function, we can call fn with the args
-    
-    
-    */
+
+    fn()
+
   </script>
 </body>
 
