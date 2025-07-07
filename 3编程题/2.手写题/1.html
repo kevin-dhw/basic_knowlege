@@ -9,21 +9,37 @@
 
 <body>
   <script>
-    function sleep(delay) {
+    function red() {
+      console.log("red");
+    }
+    function green() {
+      console.log("green");
+    }
+    function yellow() {
+      console.log("yellow");
+    }
+
+    const light = (fn, delay) => {
       return new Promise((resolve) => {
         setTimeout(() => {
+          fn()
           resolve()
         }, delay)
       })
     }
 
-    async function fn() {
-      await sleep(2000)
-      console.log('fn12345');
+    const step = () => {
+      Promise.resolve().then(() => {
+        return light(red, 2000)
+      }).then(() => {
+        return light(green, 2000)
+      }).then(() => {
+        return light(yellow, 2000)
+      }).then(() => {
+        return step()
+      })
     }
-
-    fn()
-
+    step()
   </script>
 </body>
 
