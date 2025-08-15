@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: 100px 1fr 2fr;
+        /* 第1列100px，第2列1份，第3列2份 */
+        grid-template-rows: 50px auto;
+        /* 第1行50px，第2行自适应 */
+        gap: 10px;
+    }
+
+    .item {
+        background-color: #e6f3ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #007bff;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>

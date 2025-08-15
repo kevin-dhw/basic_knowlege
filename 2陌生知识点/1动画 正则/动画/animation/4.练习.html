@@ -1,38 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .box {
-        width: 100px;
-        height: 100px;
-        background-color: red;
-        animation-name: move;
-        animation-duration: 5s;
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Animation</title>
+  <style>
+    /* 定义动画 */
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+        /* 从右侧超出屏幕 */
+        opacity: 0;
+        /* 初始透明度为 0 */
       }
-      @keyframes move {
-        0% {
-          transform: translate(0, 0);
-        }
-        25% {
-          transform: translate(1000px, 0);
-        }
-        50% {
-          transform: translate(1000px, 500px);
-        }
-        75% {
-          transform: translate(0, 500px);
-        }
-        100% {
-          transform: translate(0, 0);
-        }
+
+      to {
+        transform: translateX(0);
+        /* 移动到屏幕内 */
+        opacity: 1;
+        /* 最终透明度为 1 */
       }
-    </style>
-  </head>
-  <body>
-    <div class="box"></div>
-    <script></script>
-  </body>
+    }
+
+    /* 弹出框样式 */
+    .popup {
+      position: fixed;
+      top: 50px;
+      /* 距离顶部 50px */
+      right: 0;
+      /* 从右侧出现 */
+      width: 300px;
+      /* 弹出框宽度 */
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 5px;
+      z-index: 1000;
+      /* 确保弹出框在最上层 */
+      transform: translateX(100%);
+      /* 初始位置在右侧 */
+      opacity: 0;
+      /* 初始透明度为 0 */
+      animation: slideInFromRight 0.5s ease forwards;
+      /* 应用动画 */
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="showPopup()">Show Popup</button>
+
+  <div class="popup" id="popup">
+    <h3>Popup Title</h3>
+    <p>This is a popup that slides in from the right.</p>
+    <button onclick="hidePopup()">Close</button>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function hidePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
+</body>
+
 </html>

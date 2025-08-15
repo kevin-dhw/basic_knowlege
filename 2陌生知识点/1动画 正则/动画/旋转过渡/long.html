@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Element Visibility</title>
+    <style>
+        .box {
+            width: 0;
+            /* 初始宽度为 0 */
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.5s ease;
+            /* 平滑过渡效果 */
+            overflow: hidden;
+            /* 隐藏超出部分 */
+        }
+
+        .box.visible {
+            width: 200px;
+            /* 显示时宽度为 200px */
+        }
+    </style>
+</head>
+
+<body>
+    <button id="toggleButton">Toggle Box</button>
+    <div class="box" id="box">
+        Hello, World!
+    </div>
+
+    <script>
+        const button = document.getElementById('toggleButton');
+        const box = document.getElementById('box');
+
+        button.addEventListener('click', () => {
+            box.classList.toggle('visible'); // 切换 visible 类
+        });
+    </script>
+</body>
+
+</html>
