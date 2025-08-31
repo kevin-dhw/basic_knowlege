@@ -28,6 +28,18 @@
     show content of desktop
   </div>
   <script>
+    const obj = [{
+      id: '123456'
+    }, {
+      id: '23446'
+    }, {
+      id: '56778'
+    }]
+    const res = obj.map(item => item.id).join(',')
+    console.log(res, 'res');
+    const temp = obj.splice(1, 1)
+    console.log(obj, 'obj');
+
 
   </script>
 
