@@ -9,38 +9,28 @@
 
 <body>
   <script>
-    function red() {
-      console.log("red");
+    var num = 200;
+    function double(num) {
+      return num * 2;
     }
-    function green() {
-      console.log("green");
-    }
-    function yellow() {
-      console.log("yellow");
+    function pow(num) {
+      return num ** 2;
     }
 
-    const light = (fn, delay) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          fn()
-          resolve()
-        }, delay)
-      })
+    function composeFn(...fns) {
+      return function (...args) {
+        let result = fns[0].apply(this, args)
+        for (let i = 1; i < fns.length; i++) {
+          let fn = fns[i]
+          result = fn.apply(this, [result])
+        }
+        return result
+      }
     }
+    const fun = composeFn(double, pow)
+    console.log(fun(num), '3344');
 
-    const step = () => {
-      Promise.resolve().then(() => {
-        return light(red, 2000)
-      }).then(() => {
-        return light(green, 2000)
-      }).then(() => {
-        return light(yellow, 2000)
-      }).then(() => {
-        return step()
-      })
-    }
-    step()
   </script>
 </body>
 
-</html>
+</html>xw
