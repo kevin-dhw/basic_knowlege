@@ -9,27 +9,37 @@
 
 <body>
   <script>
-    var num = 200;
-    function double(num) {
-      return num * 2;
+    function red() {
+      console.log("red");
     }
-    function pow(num) {
-      return num ** 2;
+    function green() {
+      console.log("green");
+    }
+    function yellow() {
+      console.log("yellow");
     }
 
-    function composeFn(...fns) {
-      return function (...args) {
-        let result = fns[0].apply(this, args)
-        for (let i = 1; i < fns.length; i++) {
-          let fn = fns[i]
-          result = fn.apply(this, [result])
-        }
-        return result
-      }
+    const light = (time, light) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          light()
+          resolve()
+        }, time)
+      })
     }
-    const fun = composeFn(double, pow)
-    console.log(fun(num), '3344');
 
+    const step = () => {
+      Promise.resolve().then(() => {
+        return light(2000, red)
+      }).then(() => {
+        return light(2000, green)
+      }).then(() => {
+        return light(2000, yellow)
+      }).then(() => {
+        step()
+      })
+    }
+    step()
   </script>
 </body>
 
